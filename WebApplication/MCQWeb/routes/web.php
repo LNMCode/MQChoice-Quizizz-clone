@@ -1,0 +1,38 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\HomeController;
+
+use \App\Http\Controllers\Users\LoginController;
+use \App\Http\Controllers\Users\JoinRoomController;
+use \App\Http\Controllers\Users\RoomQuesController;
+use \App\Http\Controllers\Users\EnterCodeController;
+
+use \App\Http\Controllers\Host\HostRoomController;
+use \App\Http\Controllers\Host\ManageRoomController;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', [HomeController::class, 'index']);
+
+Route::get('/users/login', [LoginController::class, 'index']);
+Route::post('/users/login', [LoginController::class, 'login']);
+
+Route::post('/users/joinroom', [JoinRoomController::class, 'index']);
+
+Route::get('/users/joinroom/start', [RoomQuesController::class, 'index']);
+
+Route::get('/entercode', [EnterCodeController::class, 'index']);
+
+Route::get('/manageroom/{idroom}', [ManageRoomController::class, 'index']);
+
+Route::get('/host/{idroom}', [HostRoomController::class, 'index']);
