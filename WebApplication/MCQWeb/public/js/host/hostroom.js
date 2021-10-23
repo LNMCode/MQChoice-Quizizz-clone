@@ -11,3 +11,13 @@ function onStartRoom(data){
         }
     )
 }
+
+window.onbeforeunload = function (e) {
+    console.log('Truoc khi unload');
+    return 'Sure?'
+};
+
+window.onunload = function(e){
+    // Close room and remove all result of users in room
+    console.log('No load luon ne');
+}

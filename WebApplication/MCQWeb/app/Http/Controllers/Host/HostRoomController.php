@@ -10,7 +10,8 @@ class HostRoomController extends Controller
 {
     public function index(Request $request, $idroom){
         $url_current = 'http://127.0.0.1:3000';
-        if(isset($idroom)){
+        $roomIsOpen = $this->openRoom($idroom, $url_current);
+        if(isset($idroom) && $roomIsOpen){
             $response = Http::post($url_current.'/room/getroombyid?idroom='.$idroom);
             $room = json_decode($response, true);
             return view('host.hostroom',[
@@ -25,10 +26,9 @@ class HostRoomController extends Controller
         ]);
     }
 
-    private function getListRoomById($id, $url_current){
-
-        if (isset($ids)){
-        }
-        return $rooms;
+    private function openRoom($id, $url_current){
+        $response = Http::post($url_current.'/room/openroom?idroom='.$id);
+        $room = json_decode($response, true);
+        return $room['message'] == 'ok';
     }
 }
