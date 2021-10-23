@@ -25,6 +25,9 @@ function onCloseRoom(data){
     if (answer) {
         console.log('Close room and user be pushed out');
         console.log('Ok t dong nha');
+        closeRoom(data);
+        window.onbeforeunload = false;
+        window.location.replace('http://localhost:8000/manageroom/id123456');
     }
     else {
         console.log('Huy dong');
@@ -39,4 +42,13 @@ window.onbeforeunload = function (e) {
 window.onunload = function(e){
     // Close room and remove all result of users in room
     console.log('No load luon ne');
+}
+
+function closeRoom(data)
+{
+    var theUrl = 'http://127.0.0.1:3000/room/closeroom?idroom=' + data.value;
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "POST", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
 }

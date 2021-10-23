@@ -9,12 +9,12 @@ router.post('/', async (req, res) => {
         var password = req.query.password;
 
         console.log('Login ' + username + ' - ' + password);
-        await User.findOne({username: username, password: password}).then((user) => {
-            console.log(user);
-            if(user == null){
+        await User.findOne({username: username, password: password}).then((doc) => {
+            console.log(doc);
+            if(doc == null){
                 res.json({message: 'fail', doc: {}});
             } else {
-                res.json({message: 'ok', doc: user});
+                res.json({message: 'ok', doc: doc});
             }
         })
     } catch (error) {

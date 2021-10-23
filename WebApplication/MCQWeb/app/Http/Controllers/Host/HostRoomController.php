@@ -12,12 +12,18 @@ class HostRoomController extends Controller
         $url_current = 'http://127.0.0.1:3000';
         $roomIsOpen = $this->openRoom($idroom, $url_current);
         if(isset($idroom) && $roomIsOpen){
-            $response = Http::post($url_current.'/room/getroombyid?idroom='.$idroom);
-            $room = json_decode($response, true);
-            return view('host.hostroom',[
-                'title' => 'Host Room'.$idroom,
-                'room' => $room
-            ]);
+            $cookie = $_COOKIE['userLogin'];
+            $cookie = json_decode($cookie, true);
+            $iduser = $cookie['iduser'];
+
+            $response = Http::post($url_current.'/room/getroombyid?idroom='.$idroom.'&iduser='.$iduser);
+            if($response['message'] != 'fail'){
+                $room = $response['doc'];
+                return view('host.hostroom',[
+                    'title' => 'Host Room'.$idroom,
+                    'room' => $room
+                ]);
+            }
         }
 
         return view('host.hostroom',[
@@ -28,7 +34,7 @@ class HostRoomController extends Controller
 
     private function openRoom($id, $url_current){
         $response = Http::post($url_current.'/room/openroom?idroom='.$id);
-        $room = json_decode($response, true);
-        return $room['message'] == 'ok';
+        $room = $response;
+        return $room['message'] == 'ok' ? true : false;
     }
 }

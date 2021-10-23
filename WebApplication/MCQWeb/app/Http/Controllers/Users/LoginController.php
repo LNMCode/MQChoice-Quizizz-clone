@@ -21,11 +21,11 @@ class LoginController extends Controller
 
         if(!empty($username) && !empty($password)){
             $response = Http::post($url_current.'/login?username='.$username.'&password='.$password);
-            $user = json_decode($response, true);
-            if($user['message'] != 'fail'){
-                $user = $user['doc'];
+            if($response['message'] != 'fail'){
+                $user = $response['doc'];
                 if($username == $user['username'] && $password == $user['password']){
-                    $rooms = $this->getListRoomById($user['rooms'], $url_current);
+                    $rooms = $this->getListRoomById($user['rooms'], $url_current, $user['id']);
+                    $this->saveUserLogin($user['id']);
                     return view('admin', [
                         'title' => 'Admin page',
                         'data' => $user,
@@ -40,14 +40,26 @@ class LoginController extends Controller
         ]);
     }
 
-    private function getListRoomById(array $ids, $url_current){
+    private function getListRoomById(array $ids, $url_current, $iduser){
         $rooms = array();
         if (sizeof($ids) > 0){
             foreach($ids as $id){
-                $response = Http::post($url_current.'/room/getroombyid?idroom='.$id['idroom']);
-                array_push($rooms, $response);
+                $response = Http::post($url_current.'/room/getroombyid?idroom='.$id['idroom'].'&iduser='.$iduser);
+                echo $response;
+                if($response['message'] != 'fail') array_push($rooms, $response['doc']);
             }
         }
         return $rooms;
+    }
+
+    private function saveUserLogin($iduserlogin){
+        $cookie_name = 'userLogin';
+        $cookie_value = ['iduser' => $iduserlogin];
+        if(!isset($_COOKIE[$cookie_name])) {
+            echo "Cookie named '" . $cookie_name . "' is not set!";
+            setcookie($cookie_name, json_encode($cookie_value), time() + (86400 * 30), "/"); // 86400 = 1 day
+            return false;
+        }
+        return true;
     }
 }

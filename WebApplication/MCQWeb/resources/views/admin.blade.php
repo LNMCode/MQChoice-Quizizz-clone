@@ -7,6 +7,7 @@
     This is admin page of 
     <br>
     {{$data['username']}}
+    {{$data['id']}}
     <br>
     @if(count($rooms)>0)
         @foreach ($rooms as $room)
