@@ -23,7 +23,7 @@ class JoinRoomController extends Controller
         if (isset($room)){
             if(!$room['isopen']){
                 return view('users.entercode', [
-                    'title' => "Room is not start",
+                    'title' => "Room is not open, please contact host room",
                 ]); 
             }
             $isExist = $this->saveCookie($idRoom, $iduser, $nameUser);
