@@ -9,7 +9,9 @@
         <p>This is my body hostroom.</p>
         @if ($room != null)
             <p>{{$room['title']}}</p>
-            <button type="button" class="btn btn-primary" id='btnStartRoom' value="{{$room['idroom']}}" onclick="onStartRoom(this)">Start Room {{$room['idroom']}}</button>        
+            <button type="button" class="btn btn-primary" id='btnStartRoom' value="{{$room['idroom']}}" onclick="onStartRoom(this)">Start Room {{$room['idroom']}}</button> 
+            
+            <button type="button" class="btn btn-danger" id='btnCloseRoom' value="{{$room['idroom']}}" onclick="onCloseRoom(this)">Close Room {{$room['idroom']}}</button>          
         @else
             <b>Da xay ra loi</b>
         @endif
