@@ -10,10 +10,10 @@
     <!-- Begin page one-->
     @section('header')
         <header>
-            <a href="#" class="logo">LOGO</a>
+            <a href="#" class="logo"><img src="../image/logo.jpg" alt=""></a>
             <ul>
                 <li><a href="/entercode">Enter code</a></li>
-                <li><a href="/users/login">Sign up ></a></li>
+                <li><a href="/users/login" class="signup">Sign up ></a></li>
             </ul>
         </header>
     @endsection
@@ -142,9 +142,49 @@
             @yield('review-three-tab-1')
         </div>
     @endsection
-
-    
     <!-- End page four-->
+
+    <!-- Begin page five-->
+    @section('ready-for-use')
+        <div class="header-text">
+            <p>Ready for meaningful engagement?</p>
+        </div>
+        <a href="#">Get started ></a>
+    @endsection
+    <!-- End page five-->
+
+    <!-- Begin page six-->
+    @section('getting-started')
+        <div class="header-text">
+            <p>Getting started is free and easy</p>
+        </div>
+        <div class="getting-started-content">
+            <ul>
+                <li>
+                    <div class="step-item-num">1</div>
+                    <div class="step-item-title">Add question and poll questions</div>
+                    <div class="step-item-image">
+                        <img src="../image/6-GETTING_STARTED-1.png" alt="">
+                    </div>
+                </li>
+                <li>
+                    <div class="step-item-num">2</div>
+                    <div class="step-item-title">Participants engage from any device.</div>
+                    <div class="step-item-image">
+                        <img src="../image/6-GETTING_STARTED-2.png" alt="">
+                    </div>
+                </li>
+                <li>
+                    <div class="step-item-num">3</div>
+                    <div class="step-item-title">Get instant<br>feedback.</div>
+                    <div class="step-item-image">
+                        <img src="../image/6-GETTING_STARTED-3.png" alt="">
+                    </div>
+                </li>
+            </ul>
+        </div>
+    @endsection
+    <!-- End page six-->
 
     <section class="d-flex">
         @yield('header')
@@ -164,6 +204,14 @@
 
     <section class="review-three-tab">
         @yield('review-three-tab')
+    </section>
+
+    <section class="ready-for-use">
+        @yield('ready-for-use')
+    </section>
+
+    <section class="getting-started-container">
+        @yield('getting-started')
     </section>
 
     @include('foot')

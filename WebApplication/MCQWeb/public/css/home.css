@@ -40,6 +40,7 @@ header{
     justify-content: space-between;
     align-items: center;
     z-index: 10000;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 }
 
 header .logo{
@@ -47,11 +48,19 @@ header .logo{
     max-width: 70px;   
 }
 
+header .logo img{
+    
+    height: 100%;
+    max-width: 130px;
+    object-fit: contain;
+}
+
 header ul{
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 0px;
 }
 
 header ul li{
@@ -65,6 +74,23 @@ header ul li a{
     color: var(--black);
     font-weight: 500;
     text-decoration: none;
+}
+
+header ul li .signup{
+    padding: 13px 20px;
+    width: 150px;
+    background: var(--yellow);
+    color: var(--white2);
+    border-radius: 40px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: 0.3s;
+    text-align: center;
+}
+
+header ul li .signup:hover{
+    background: var(--black);
 }
 
 .content{
@@ -353,7 +379,8 @@ header ul li a{
 }
 
 .review-three-tab{
-    padding-top: 60px !important;
+    justify-content: center;
+    align-content: center;
 }
 
 .review-three-tab .three-tab{
@@ -408,7 +435,9 @@ header ul li a{
 
 .review-three-tab .three-tab-content{
     padding: 0px 70px;
-    display: flex;
+    display: flex;    
+    justify-content: center;
+    align-items: center;
 }
 
 .review-three-tab .three-tab-content .three-tab-content-left{
@@ -477,3 +506,81 @@ header ul li a{
     width: 100%;
 }
 
+.ready-for-use{
+    min-height: 40vh;
+    background: linear-gradient(
+        90deg, rgba(244,166,70,0.2) 0%, rgba(244,166,70,0) 100%);
+}
+
+.ready-for-use a{
+    display: block;
+    position: relative;
+    margin: 30px auto;
+    margin-bottom: 0px;
+    padding: 13px 20px;
+    width: 200px;
+    background: var(--yellow);
+    color: var(--white2);
+    border-radius: 40px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.ready-for-use a:hover{
+    background: var(--black);
+}
+
+.getting-started-container ul{
+    max-width: 1184px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+}
+
+.getting-started-container ul li{
+    background-color: #FFFAF2;
+    border: 4px solid rgba(255,164,2,0.1);
+    box-sizing: border-box;
+    width: calc((100%-32px) / 3);
+    margin-right: 16px;
+    box-shadow: inset -4px -4px 24px rgb(0 0 0 / 4%), inset 4px 4px 24px #fff;
+    border-radius: 24px;
+    padding: 16px 16px 0;
+    text-align: center;
+}
+
+.getting-started-container ul li .step-item-num{
+    color: #461A42;
+    margin: 24px auto;
+    width: 52px;
+    height: 52px;
+    background: #fff;
+    border: 1px solid #f2f2f2;
+    box-shadow: 0px 0px 9px rgb(0 0 0 / 5%), inset 2px 2px 8px rgb(255 255 255 / 25%), inset -2px -2px 4px rgb(0 0 0 / 5%);
+    border-radius: 50%;
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 52px;
+}
+
+.getting-started-container ul li .step-item-title{
+    color: #461A42;
+    max-width: 322px;
+    margin: 0 auto;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.getting-started-container ul li .step-item-image{
+    margin-top: -48px;
+}
+
+.getting-started-container ul li .step-item-image img{
+    width: 100%;
+}
