@@ -40,13 +40,22 @@ class JoinRoomController extends Controller
                         // Check them la da played chua,
                         // neu roi chi ms hoi
                         if($room['isstart']){
+                            // Ktra da choi chua o day >
                             return view('users.joinroom', [
                                 'title' => 'Join Room',
                                 'textBody' => 'Do you want reset all answer?',
                                 'room' => $room,
                                 'iduser' => $iduser,
-                                'isCheckStart' => true,
+                                'isCheckStart' => false,
                             ]);       
+                        } else {
+                            return view('users.joinroom', [
+                                'title' => 'Join Room',
+                                'textBody' => 'Wait host start room',
+                                'room' => $room,
+                                'iduser' => $iduser,
+                                'isCheckStart' => false
+                            ]);
                         }
                         // Neu chua thi start luon
                     } else {
@@ -66,6 +75,12 @@ class JoinRoomController extends Controller
                         ]);       
                     }else {
                         print('Chuyen thang qua luon vi bat dau roi');
+                        return view('users.roomques', [
+                            'title' => 'Room Started',
+                            'idroom' => $idRoom,
+                            'iduser' => $iduser,
+                            'listQues' => $room['data']
+                        ]);
                     }
                 }   
             }

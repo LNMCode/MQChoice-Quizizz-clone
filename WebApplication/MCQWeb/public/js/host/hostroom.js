@@ -8,7 +8,8 @@ var socket = io.connect('http://127.0.0.1:3000', {query: 'idroom='+idroom+'&type
 console.log(idroom);
 console.log(iduser);
 console.log('Host ' + idroom);
-socket.on('playerJoinRoom' + idroom, (data) => {
+socket.on('playerJoinRoomid123456' , (data) => {
+    console.log(data.iduser);
     var container = document.getElementById('containerplayerslist');
     var lineUser = document.createElement('p');
     lineUser.innerText = data.iduser;
@@ -20,12 +21,7 @@ function onStartRoom(data){
     if (answer) {
         console.log('Ok t dong nha');
         console.log(data);
-        socket.emit(
-            'hostStartRoom', 
-            {
-                idroom: data.value,
-            }
-        )
+        socket.emit('hostStartRoom', {idroom: data.value});
     }
     else {
         console.log('Huy start');
