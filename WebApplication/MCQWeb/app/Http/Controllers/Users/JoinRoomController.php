@@ -16,55 +16,62 @@ class JoinRoomController extends Controller
         $idRoom =  $request->input('idroom');
         $url_current = 'http://127.0.0.1:3000';
         $iduser = time();
-        $response = Http::post($url_current.'/room/getroombyid?idroom='.$idRoom);
-        $room = json_decode($response, $array=true);
-        $isResetPlay = false;
-        
-        if (isset($room)){
-            if(!$room['isopen']){
-                return view('users.entercode', [
-                    'title' => "Room is not open, please contact host room",
-                ]); 
-            }
-            $isExist = $this->saveCookie($idRoom, $iduser, $nameUser);
-            if($isExist){
-                $cookie = $_COOKIE['userRoom'];
-                $cookie = json_decode($cookie, true);
-                $iduser = $cookie['iduser'];
-                if($this->checkUserExist($room['players'], $iduser)){
-                    // Hoi co muon reset hay continous
-                    print('Da ton tai tai khoan');
-                    // Check them la da played chua,
-                    // neu roi chi ms hoi
-                    if($room[0]['isstart']){
+        $response = Http::get($url_current.'/joinroom?idroom='.$idRoom);
+        echo $response;
+        if($response['message'] != 'fail'){
+            $room = $response['doc'];
+            $isResetPlay = false;
+            
+            if (isset($room)){
+                if(!$room['isopen']){
+                    return view('users.entercode', [
+                        'title' => "Room is not open, please contact host room",
+                    ]); 
+                }
+                $isExist = $this->saveCookie($idRoom, $iduser, $nameUser);
+                echo $isExist;
+                if($isExist){
+                    $cookie = $_COOKIE['userRoom'];
+                    $cookie = json_decode($cookie, true);
+                    $iduser = $cookie['iduser'];
+                    if($this->checkUserExist($room['players'], $iduser)){
+                        // Hoi co muon reset hay continous
+                        print('Da ton tai tai khoan');
+                        // Check them la da played chua,
+                        // neu roi chi ms hoi
+                        if($room['isstart']){
+                            return view('users.joinroom', [
+                                'title' => 'Join Room',
+                                'textBody' => 'Do you want reset all answer?',
+                                'room' => $room,
+                                'iduser' => $iduser,
+                                'isCheckStart' => true,
+                            ]);       
+                        }
+                        // Neu chua thi start luon
+                    } else {
+                        // Throw error not availble in server
+                    }
+                } else {
+                    print('Chua ton tai tai khoan');
+                    //insert user
+                    $this->insertUserToRoom($url_current,$idRoom, $iduser, $nameUser);
+                    if(!$room['isstart']){
                         return view('users.joinroom', [
                             'title' => 'Join Room',
-                            'textBody' => 'Do you want reset all answer?',
-                            'isCheckStart' => true,
+                            'textBody' => 'Wait host start room',
+                            'room' => $room,
+                            'iduser' => $iduser,
+                            'isCheckStart' => false
                         ]);       
+                    }else {
+                        print('Chuyen thang qua luon vi bat dau roi');
                     }
-                    // Neu chua thi start luon
-                }
-            } else {
-                print('Chua ton tai tai khoan');
-                //insert user
-                $this->insertUserToRoom($url_current,$idRoom, $iduser, $nameUser);
-            }
-            if(!$room['isstart']){
-                return view('users.joinroom', [
-                    'title' => 'Join Room',
-                    'textBody' => 'Wait host start room',
-                    'isCheckStart' => false
-                ]);       
-            }else {
-                print('Chuyen thang qua luon vi bat dau roi');
+                }   
             }
         }
 
         // return view not have room (todo) will edit return
-        return view('users.entercode', [
-            'title' => "Room not available",
-        ]); 
     }
 
     private function checkUserExist(array $users, $id){

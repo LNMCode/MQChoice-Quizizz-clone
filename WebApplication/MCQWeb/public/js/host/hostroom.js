@@ -1,6 +1,19 @@
 const ip_address = '127.0.0.1'
 const socket_port = '3000'
-var socket = io.connect('http://127.0.0.1:3000')
+
+var idroom = document.getElementById('idroom').innerText
+var iduser = document.getElementById('iduser').innerText
+var socket = io.connect('http://127.0.0.1:3000', {query: 'idroom='+idroom+'&type=host&iduser='+iduser});
+
+console.log(idroom);
+console.log(iduser);
+console.log('Host ' + idroom);
+socket.on('playerJoinRoom' + idroom, (data) => {
+    var container = document.getElementById('containerplayerslist');
+    var lineUser = document.createElement('p');
+    lineUser.innerText = data.iduser;
+    container.appendChild(lineUser);
+});
 
 function onStartRoom(data){
     var answer = window.confirm("Are you sure start?");
@@ -17,7 +30,6 @@ function onStartRoom(data){
     else {
         console.log('Huy start');
     }
-    
 }
 
 function onCloseRoom(data){
@@ -51,4 +63,8 @@ function closeRoom(data)
     xmlHttp.open( "POST", theUrl, false ); // false for synchronous request
     xmlHttp.send( null );
     return xmlHttp.responseText;
+}
+
+function listPlayersEnjoy(){
+
 }

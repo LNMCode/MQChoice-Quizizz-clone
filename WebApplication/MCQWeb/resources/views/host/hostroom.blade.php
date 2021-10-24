@@ -2,8 +2,13 @@
 <html lang="en">
 <head>
     @include('head')
+    <link rel="stylesheet" href="../../css/hostroom.css">
 </head>
 <body>
+    @if ($room != null && $iduser != null)    
+        <div class="id-room-accesss" id="idroom">{{$room['idroom']}}</div>
+        <div class="id-user-accesss" id="iduser">{{$iduser}}</div>
+    @endif
 
     @section('content')
         <p>This is my body hostroom.</p>
@@ -21,6 +26,7 @@
     @section('players')
         <br>
         <b>Danh sach users tham gia</b>
+        <div class="container-players-accesss" id="containerplayerslist"></div>
     @endsection
     @yield('players')
 

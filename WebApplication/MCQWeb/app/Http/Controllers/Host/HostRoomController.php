@@ -21,14 +21,16 @@ class HostRoomController extends Controller
                 $room = $response['doc'];
                 return view('host.hostroom',[
                     'title' => 'Host Room'.$idroom,
-                    'room' => $room
+                    'room' => $room,
+                    'iduser' => $iduser
                 ]);
             }
         }
 
         return view('host.hostroom',[
             'title' => 'Host Room'.$idroom,
-            'room' => null
+            'room' => null,
+            'iduser' => null
         ]);
     }
 

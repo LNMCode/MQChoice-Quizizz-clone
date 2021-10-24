@@ -18,12 +18,33 @@ router.get('/', async (req, res) => {
         $idroom = req.query.idroom;
         await Room.findOne({idroom: $idroom}).then((doc) => {
             console.log(doc);
-            res.json(doc);
+            if(doc == null){
+                res.json({message: 'fail', doc: {}});
+            } else {
+                res.json({message: 'ok', doc: doc});
+            }
         });
     } catch (err) {
         res.json({message: err});
     }
 });
+
+router.get('/getques', async (req, res) => {
+    try {
+        console.log(req.query.idroom);
+        $idroom = req.query.idroom;
+        await Room.findOne({idroom: $idroom}).then((doc) => {
+            console.log(doc);
+            if(doc == null){
+                res.json({message: 'fail', doc: {}});
+            } else {
+                res.json({message: 'ok', doc: doc});
+            }
+        });
+    } catch (err) {
+        res.json({message: err});
+    }
+})
 
 router.put('/addusertoroom', async (req, res) => {
     try {

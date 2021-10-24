@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
     @include('head')
+    <link rel="stylesheet" href="../../css/joinroom.css">
 </head>
 <body>
+    <div class="id-room-accesss" id="idroom">{{$room['idroom']}}</div>
+    <div class="id-player-accesss" id="iduser">{{$iduser}}</div>
     <br>
     <p>{{ $textBody }}</p>
     @if ($isCheckStart)

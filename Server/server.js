@@ -41,17 +41,29 @@ mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () => {
 })
 
 io.on('connection', (socket) => {
-    console.log('Have user connected');
+    console.log('Have user connected ' + socket.handshake.query.iduser);
 
+    // Player enjoy into a room
+    var idroom = socket.handshake.query.idroom;
+    var typeJoin = socket.handshake.query.type;
+    var idplayer = socket.handshake.query.iduser;
+    if (typeJoin == 'player'){
+        console.log('Have player enjoy: ' + idroom);
+        socket.emit('playerJoinRoom' + idroom, {idroom: idroom, typejoin: typeJoin, iduser: idplayer});
+    }
+
+    // Host start a room
+    socket.on('hostStartRoom', (data) => {
+        io.sockets.emit('waitStartRoom', 'id123456');
+    });
+
+    // Send answer from player in room
     socket.on('sendToServer', data => {
         console.log(socket.id);
         console.log(data);
     });
 
-    socket.on('hostStartRoom', (data) => {
-        io.sockets.emit('waitStartRoom', 'id123456');
-    });
-
+    //Disconnect socket
     socket.on('disconnect', (socket) => {
         console.log('Disconnection');
     })
