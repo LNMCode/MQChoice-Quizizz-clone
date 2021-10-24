@@ -13,7 +13,7 @@
         <b> {{$ques['valuesques']}} </b>
         <p> {{ $ques['ans'][0]['valueans']}} </p>
         @foreach ($ques['ans'] as $ans)
-            <button type="button" class="btn btn-{{$ans['color']}}" onclick="onClickAns('{{$idroom}}', '{{$iduser}}', '{{$ques['idques']}}', '{{$ans['idans']}}', '{{$ans['valueans']}}')">{{$ans['valueans']}}</button>
+            <button id="{{$ques['idques']}}{{$ans['idans']}}" type="button" class="btn btn-{{$ans['color']}}" onclick="onClickAns('{{$idroom}}', '{{$iduser}}', '{{$ques['idques']}}', '{{$ans['idans']}}', '{{$ans['valueans']}}', '{{json_encode($ques['ans'])}}')">{{$ans['valueans']}}</button>
         @endforeach
     @endforeach
     @include('foot')
