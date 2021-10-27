@@ -1,11 +1,34 @@
 const express = require('express');
 const Room = require('../models/Room');
-const { route } = require('./joinroom');
 
 const router = express.Router();
 
 router.post('/', async(req, res) => {
     console.log('From API Answer');
     console.log(req.body);
+    var idroom = req.body.idroom;
+    var iduser = req.body.iduser;
+    var nameuser = req.body.nameuser;
+    var idques = req.body.idques;
+    var idans = req.body.idans;
+    var value = req.body.value;
+    try {
+        let result = await Room.findOneAndUpdate(
+            {idroom: idroom},
+            {
+                $push: {'players.$[inner].play': {idques: idques, idans: idans}}
+            },
+            {
+                arrayFilters: [{"inner.id": iduser}],
+                new: true
+            }
+        );
+
+        if (!result) return res.json({message: 'fail'});
+        res.json({message: 'ok'})
+    } catch (error) {
+        res.json({message: err});
+    }
 });
+
 module.exports = router

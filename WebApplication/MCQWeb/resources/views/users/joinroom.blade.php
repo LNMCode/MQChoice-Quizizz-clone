@@ -7,6 +7,7 @@
 <body>
     <div class="id-room-accesss" id="idroom">{{$room['idroom']}}</div>
     <div class="id-player-accesss" id="iduser">{{$iduser}}</div>
+    <div class="id-player-accesss" id="nameuser">{{$nameuser}}</div>
     <br>
     <p>{{ $textBody }}</p>
     @if ($isCheckStart)

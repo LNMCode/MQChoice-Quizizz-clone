@@ -34,6 +34,7 @@ class JoinRoomController extends Controller
                     $cookie = $_COOKIE['userRoom'];
                     $cookie = json_decode($cookie, true);
                     $iduser = $cookie['iduser'];
+                    $nameuser = $cookie['nameuser'];
                     if($this->checkUserExist($room['players'], $iduser)){
                         // Hoi co muon reset hay continous
                         print('Da ton tai tai khoan');
@@ -46,6 +47,7 @@ class JoinRoomController extends Controller
                                 'textBody' => 'Do you want reset all answer?',
                                 'room' => $room,
                                 'iduser' => $iduser,
+                                'nameuser' => $nameuser,
                                 'isCheckStart' => false,
                             ]);       
                         } else {
@@ -54,6 +56,7 @@ class JoinRoomController extends Controller
                                 'textBody' => 'Wait host start room',
                                 'room' => $room,
                                 'iduser' => $iduser,
+                                'nameuser' => $nameuser,
                                 'isCheckStart' => false
                             ]);
                         }
@@ -71,6 +74,7 @@ class JoinRoomController extends Controller
                             'textBody' => 'Wait host start room',
                             'room' => $room,
                             'iduser' => $iduser,
+                            'nameuser' => $nameUser,
                             'isCheckStart' => false
                         ]);       
                     }else {
@@ -79,6 +83,7 @@ class JoinRoomController extends Controller
                             'title' => 'Room Started',
                             'idroom' => $idRoom,
                             'iduser' => $iduser,
+                            'nameuser' => $nameUser,
                             'listQues' => $room['data']
                         ]);
                     }

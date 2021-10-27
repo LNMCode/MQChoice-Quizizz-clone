@@ -47,29 +47,59 @@ mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () => {
 io.on('connection', (socket) => {
     console.log('Have user connected ' + socket.handshake.query.type);
 
-    // Player enjoy into a room
-    var idroom = socket.handshake.query.idroom;
-    var typeJoin = socket.handshake.query.type;
-    var idplayer = socket.handshake.query.iduser;
-    console.log('--------------------------');
-    console.log(idroom);
-    console.log(typeJoin);
-    console.log(idplayer);
-    if (typeJoin == 'player'){
-        console.log('Have player enjoy: ' + idroom);
-        io.sockets.emit('playerJoinRoom' + idroom, {idroom: idroom, typejoin: typeJoin, iduser: idplayer});
-    }
+    // Player enjoy into a room wait
+    socket.on('waitRoomSendFromClient', (data) => {
+        var idroom = data.idroom;
+        var iduser = data.iduser;
+        var nameuser = data.nameuser;
+        console.log('--------------------------');
+        console.log(idroom);
+        console.log(nameuser);
+        console.log(iduser);
 
-    // Host start a room
-    socket.on('hostStartRoom', (data) => {
-        io.sockets.emit('waitStartRoom', 'id123456');
+        socket.join(idroom + 'wait')
+        socket.to(idroom + 'wait').emit('playerJoinRoom' + idroom, {idroom: idroom, iduser: iduser, nameuser: nameuser});
     });
 
-    // Send answer from player in room
+    // Host open a room wait
+    socket.on('hostOpenRoom', (data) => {
+        var idroom = data.idroom;
+        var iduser = data.iduser;
+
+        console.log('Host open room ' + idroom);
+        socket.join(idroom + 'wait');
+    });
+
+    // Host start a room wait
+    socket.on('hostStartRoom', (data) => {
+        var idroom = data.idroom;
+
+        socket.to(idroom + 'wait').emit('waitStartRoom' + idroom, idroom);
+    });
+
+    // Player change from room wait to room play
+    /**socket.on('playerJoinToRoomPlay', (data) => {
+        var idroom = data.idroom;
+        var iduser = data.iduser;
+
+        socket.join(idroom + 'playroom');
+    });**/
+
+    // Host observe answer of players
+    socket.on('hostObserveRoomPlay', (data) => {
+        var idroom = data.idroom;
+        var iduser = data.iduser;
+
+        socket.join(idroom + 'playroom');
+    });
+
+    // Send answer from player in room (roomques.js)
     socket.on('sendToServer', data => {
         console.log(socket.id);
         console.log(data);
+        var idroom = data.idroom;
         sendAnswerToServer("POST", "answer", data);
+        socket.to(idroom + 'playroom').emit('playerAnswered' + idroom, data);
     });
 
     //Disconnect socket
@@ -89,7 +119,9 @@ function sendAnswerToServer(method, url, data){
     return promise;
 }
 
+function getIdsUserSocketByIdRoom(method, url, idroom){
 
+}
 
 
 // socket.emit chi 1-1

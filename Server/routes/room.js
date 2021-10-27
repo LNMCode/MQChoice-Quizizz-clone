@@ -82,4 +82,21 @@ router.post('/startroom', async (req, res) => {
     }
 })
 
+router.get('/getidsusersocket', async (req, res) => {
+    try {
+        console.log(req.query.idroom);
+        $idroom = req.query.idroom;
+        await Room.findOneAndUpdate({idroom: $idroom}, {isstart: true}).then((doc) => {
+            console.log(doc);
+            if(doc == null){
+                res.json({message: 'fail', doc: {}});
+            } else {
+                res.json({message: 'ok', doc: doc});
+            }
+        });
+    } catch (error) {
+        res.json({message: err});
+    }
+})
+
 module.exports = router

@@ -10,6 +10,7 @@ use \App\Http\Controllers\Users\EnterCodeController;
 
 use \App\Http\Controllers\Host\HostRoomController;
 use \App\Http\Controllers\Host\ManageRoomController;
+use \App\Http\Controllers\Host\HostFlowRoomController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +37,5 @@ Route::get('/entercode', [EnterCodeController::class, 'index']);
 Route::get('/manageroom/{idroom}', [ManageRoomController::class, 'index']);
 
 Route::get('/host/{idroom}', [HostRoomController::class, 'index']);
+
+Route::get('/hostflowroom/flowroom', [HostFlowRoomController::class, 'index']);

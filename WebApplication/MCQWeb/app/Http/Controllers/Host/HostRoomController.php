@@ -22,7 +22,7 @@ class HostRoomController extends Controller
                 return view('host.hostroom',[
                     'title' => 'Host Room'.$idroom,
                     'room' => $room,
-                    'iduser' => $iduser
+                    'iduser' => $iduser,
                 ]);
             }
         }
@@ -30,7 +30,7 @@ class HostRoomController extends Controller
         return view('host.hostroom',[
             'title' => 'Host Room'.$idroom,
             'room' => null,
-            'iduser' => null
+            'iduser' => null,
         ]);
     }
 

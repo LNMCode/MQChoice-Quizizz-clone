@@ -14,14 +14,25 @@ class RoomQuesController extends Controller
         $response = Http::get($url_current.'/joinroom/getques?idroom='.$idroom);
         $isExits = $this->checkCookieExist();
         if($response['message'] != 'fail' && $isExits){
-            $rooms = $response['doc'];
-            $listQues = $rooms['data'];
-    
             $cookie = $_COOKIE['userRoom'];
             $cookie = json_decode($cookie, true);
             $iduser = $cookie['iduser'];
-            
-            echo $idroom;
+
+            $rooms = $response['doc'];
+            $playerById = current(array_filter($rooms['players'], function($e) use($iduser) {
+                return $e['id'] == $iduser;
+            }));
+
+            $listQuesAnswered = $playerById['play'];
+            $listIdsQuesAnswered = array();
+            foreach ($listQuesAnswered as $ans){
+                array_push($listIdsQuesAnswered, $ans['idques']);
+            }
+
+            $listQues = sizeof($listIdsQuesAnswered) > 0 ? array_filter($rooms['data'], function($v) use ($listIdsQuesAnswered) {
+                return !in_array($v['idques'], $listIdsQuesAnswered);
+            }) : $rooms['data'];
+    
             if (sizeof($rooms) != 0){
     
             }
