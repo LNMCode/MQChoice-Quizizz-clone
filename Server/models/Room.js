@@ -63,7 +63,7 @@ const RoomSchema = mongoose.Schema({
     isopen: {
         type: Boolean
     },
-    description: {
+    desription: {
         type: String
     }
 }, { collection: 'room' });

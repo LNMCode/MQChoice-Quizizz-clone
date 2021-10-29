@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\HomeController;
+use \App\Http\Controllers\AdminController;
 
 use \App\Http\Controllers\Users\LoginController;
 use \App\Http\Controllers\Users\JoinRoomController;
@@ -27,6 +28,8 @@ Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/users/login', [LoginController::class, 'index']);
 Route::post('/users/login', [LoginController::class, 'login']);
+
+Route::get('/admin', [AdminController::class, 'index']);
 
 Route::post('/users/joinroom', [JoinRoomController::class, 'index']);
 

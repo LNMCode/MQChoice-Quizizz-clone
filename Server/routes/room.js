@@ -221,9 +221,26 @@ router.get('/delquestion', async(req, res) => {
     }
 })
 
-router.post('/updateroom', async(req, res) => {
+router.get('/updateroom', async(req, res) => {
     // Update room this function
     // Only update name and description
+    try {
+        var idroom = req.query.idroom;
+        var title = req.query.nameroom;
+        var description = req.query.desriptionroom;
+
+        await Room.findOneAndUpdate({ idroom: idroom }, {
+            title: title,
+            desription: description
+        })
+        res.writeHead(302, {
+            'Location': 'http://localhost:8000/manageroom/' + idroom
+        });
+        res.end();
+    } catch (error) {
+        res.json({ message: error });
+
+    }
 })
 
 module.exports = router

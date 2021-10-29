@@ -25,7 +25,7 @@ class LoginController extends Controller
                 $user = $response['doc'];
                 if($username == $user['username'] && $password == $user['password']){
                     $rooms = $this->getListRoomById($user['rooms'], $url_current, $user['id']);
-                    $this->saveUserLogin($user['id']);
+                    $this->saveUserLogin($user['id'], $user['username'], $user['password']);
                     return view('admin', [
                         'title' => 'Admin page',
                         'data' => $user,
@@ -51,9 +51,9 @@ class LoginController extends Controller
         return $rooms;
     }
 
-    private function saveUserLogin($iduserlogin){
+    private function saveUserLogin($iduserlogin, $username, $password){
         $cookie_name = 'userLogin';
-        $cookie_value = ['iduser' => $iduserlogin];
+        $cookie_value = ['iduser' => $iduserlogin, 'username' => $username, 'password' => $password];
         if(!isset($_COOKIE[$cookie_name])) {
             echo "Cookie named '" . $cookie_name . "' is not set!";
             setcookie($cookie_name, json_encode($cookie_value), time() + (86400 * 30), "/"); // 86400 = 1 day

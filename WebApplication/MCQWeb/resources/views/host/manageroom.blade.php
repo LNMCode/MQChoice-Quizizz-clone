@@ -8,8 +8,8 @@
     @section('header')
         <header id="header-save">
             <a href="/" class="logo"><img src="../image/logo.jpg" alt=""></a>
-            <ul id="ul-header-save">
-                <li id="li-header-save"><a id="save-room" href="/save">Save</a></li>
+            <ul>
+                <li><a href="/admin" class="signup">Admin page</a></li>
             </ul>
         </header>
     @endsection
@@ -21,7 +21,7 @@
               <h3 class="card-title">Edit room</h3>
             </div>
             <div class="card-body">
-                <form action="">
+                <form action="{{$url.'/updateroom'}}" method="get">
                     <div class="form-group">
                         <label for="nameofroom">Name of room</label>
                         <input type="text" class="form-control mb-2" id="nameofroom" placeholder="{{isset($room) ? $room['title'] : 'Enter name room'}}" name="nameroom" value="{{isset($room) ? $room['title'] : ''}}" required>
@@ -29,7 +29,10 @@
                     <div class="form-group">
                         <label for="desriptionofroom">Description</label>
                         <textarea type="text" class="form-control mb-2" id="desriptionofroom" placeholder="{{isset($room) ? $room['desription'] : 'Enter description room'}}" rows="3" name="desriptionroom" required>{{isset($room) ? $room['desription'] : ''}}</textarea>
-                    </div>
+                    </div>                    
+                    @if (isset($room))
+                        <input type="text" class="invisible d-none" value="{{$room['idroom']}}" name="idroom">
+                    @endif
                     <button type="submit" href="#" class="btn btn-primary">Save</button>
                 </form>
             </div>

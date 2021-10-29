@@ -33,7 +33,7 @@ section {
     margin-top: 20px;
 }
 
-#header-save {
+header {
     position: fixed;
     top: 0;
     left: 0;
@@ -47,18 +47,18 @@ section {
     background: var(--white);
 }
 
-#header-save .logo {
+header .logo {
     position: relative;
     max-width: 70px;
 }
 
-#header-save .logo img {
+header .logo img {
     height: 100%;
     max-width: 130px;
     object-fit: contain;
 }
 
-#header-save #ul-header-save {
+header ul {
     position: relative;
     display: flex;
     justify-content: center;
@@ -66,23 +66,40 @@ section {
     margin-bottom: 0px;
 }
 
-#header-save #ul-header-save #li-header-save {
+header ul li {
     list-style: none;
     display: flex;
     margin-left: 30px;
 }
 
-#header-save #ul-header-save #li-header-save #save-room {
+header ul li a {
     display: inline-block;
     color: var(--black);
     font-weight: 500;
     text-decoration: none;
 }
 
+header ul li .signup {
+    padding: 13px 20px;
+    width: 150px;
+    background: var(--yellow);
+    color: var(--white2);
+    border-radius: 40px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: 0.3s;
+    text-align: center;
+}
+
+header ul li .signup:hover {
+    background: var(--black);
+}
+
 section {
     position: relative;
     width: 100%;
-    padding: 50px 300px 10px 300px;
+    padding: 70px 300px 10px 300px;
     justify-content: space-around;
     align-items: center;
     background: var(--white);
