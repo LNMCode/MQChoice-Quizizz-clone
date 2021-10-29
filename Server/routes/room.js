@@ -144,17 +144,81 @@ router.get('/addquestion', async(req, res) => {
             'Location': 'http://localhost:8000/manageroom/' + idroom
         });
         res.end();
-    } catch (error) {
+    } catch (err) {
         res.json({ message: err });
     }
 })
 
-router.post('/updatequestion', async(req, res) => {
-
+router.get('/updatequestion', async(req, res) => {
+    try {
+        console.log(req.query);
+        var titlequestion = req.query.titlequestion;
+        var ans1 = req.query.ans1;
+        var ans2 = req.query.ans2;
+        var ans3 = req.query.ans3;
+        var ans4 = req.query.ans4;
+        var answer = req.query.answer;
+        var idroom = req.query.idroom;
+        var idques = req.query.idques;
+        await Room.findOneAndUpdate({ idroom: idroom }, {
+            $set: {
+                'data.$[inner].valuesques': titlequestion,
+                'data.$[inner].correct': answer,
+                'data.$[inner].ans': [{
+                        idans: 'ans1',
+                        valueans: ans1,
+                        color: answer === 'ans1' ? 'green' : 'red'
+                    },
+                    {
+                        idans: 'ans2',
+                        valueans: ans2,
+                        color: answer === 'ans2' ? 'green' : 'red'
+                    },
+                    {
+                        idans: 'ans3',
+                        valueans: ans3,
+                        color: answer === 'ans3' ? 'green' : 'red'
+                    },
+                    {
+                        idans: 'ans4',
+                        valueans: ans4,
+                        color: answer === 'ans4' ? 'green' : 'red'
+                    }
+                ]
+            }
+        }, {
+            arrayFilters: [{ "inner.idques": idques }],
+            new: true
+        });
+        res.writeHead(302, {
+            'Location': 'http://localhost:8000/manageroom/' + idroom
+        });
+        res.end();
+    } catch (err) {
+        res.json({ message: err });
+    }
 })
 
-router.post('/delquestion', async(req, res) => {
-
+router.get('/delquestion', async(req, res) => {
+    try {
+        var idroom = req.query.idroom;
+        var idques = req.query.idques;
+        console.log(idroom);
+        console.log(idques);
+        await Room.findOneAndUpdate({ idroom: idroom }, {
+            $pull: {
+                data: {
+                    idques: idques
+                }
+            }
+        })
+        res.writeHead(302, {
+            'Location': 'http://localhost:8000/manageroom/' + idroom
+        });
+        res.end();
+    } catch (err) {
+        res.json({ message: err });
+    }
 })
 
 router.post('/updateroom', async(req, res) => {

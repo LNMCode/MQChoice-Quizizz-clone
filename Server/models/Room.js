@@ -27,6 +27,9 @@ const RoomSchema = mongoose.Schema({
         },
         time: {
             type: String
+        },
+        index: {
+            type: String
         }
     }],
     isstart: {

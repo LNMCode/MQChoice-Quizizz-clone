@@ -54,7 +54,7 @@
                                         <a class="nav-link active" href="#edit-ques-content-{{$ques['idques']}}" data-toggle="collapse" aria-expanded="false" aria-controls="edit-ques-content-{{$ques['idques']}}">Edit</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#sales-chart" data-toggle="tab">
+                                        <a class="nav-link" href="{{$url}}/delquestion?idroom={{$room['idroom']}}&idques={{$ques['idques']}}">
                                             <i class="far fa-trash-alt"></i>
                                             Remove
                                         </a>
@@ -76,32 +76,30 @@
                                     </div>
                                 </div>
                                 <div id="edit-ques-content-{{$ques['idques']}}" class="collapse card-body">
-                                    <form action="#" method="get">
-                                        <div class="form-group row">
-                                        <label for="inputQuestion" class="col-sm-2 col-form-label">Question</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputQuestion" placeholder="{{$ques['valuesques']}}" name="inputQuestion">
+                                    <form action="{{$url.'/updatequestion'}}" method="get">
+                                        <div class="form-group">
+                                            <label for="titlequestion">Enter question</label>
+                                            <textarea type="text" class="form-control textarea-none-resize" id="titlequestion" placeholder="Enter question" name="titlequestion" rows="2" required>{{$ques['valuesques']}}</textarea>
                                         </div>
-                                        </div>
-                                        <fieldset class="form-group">
                                         <div class="row">
-                                            <legend class="col-form-label col-sm-2 pt-0">Answers</legend>
-                                            <div class="col-sm-10">
-                                                
                                             @foreach ($ques['ans'] as $ans)
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" {{$ques['correct'] == $ans['idans'] ? 'checked' : ''}}>
-                                                    <label class="form-check-label" for="gridRadios1">{{$ans['valueans']}}</label>
+                                                <div class="col">
+                                                    <div class="card">
+                                                        <div class="card-body d-block">
+                                                            <div class="form-check mb-4">
+                                                                <input class="form-check-input check-input-custom" type="radio" name="answer" id="{{$ans['idans']}}" value="{{$ans['idans']}}" title="Mark this as the correct answer" required {{$ans['idans'] == $ques['correct'] ? 'checked' : ''}}>
+                                                            </div>
+                                                            <textarea type="text" class="form-control wrap-text text-center text-break textarea-none-resize col mt-5" placeholder="Answer" rows="4" required name="{{$ans['idans']}}">{{$ans['valueans']}}</textarea>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             @endforeach
-                                            </div>
                                         </div>
-                                        </fieldset>
-                                        <div class="form-group row">
-                                        <div class="col-sm-10">
-                                            <button type="submit" class="btn btn-primary">Save</button>
-                                        </div>
-                                        </div>
+                                        @if (isset($room))
+                                            <input type="text" class="invisible d-none" value="{{$room['idroom']}}" name="idroom">
+                                            <input type="text" class="invisible d-none" value="{{$ques['idques']}}" name="idques">
+                                        @endif
+                                        <button type="submit" class="btn btn-primary d-block mx-auto">Save</button>
                                     </form>
                                 </div>
                             </div>
@@ -119,9 +117,9 @@
     <div class="container-add-question invisible" id="container-add-question">
         <section>
             <div>
-                <form action="{{$url}}/addquestion" method="get" id="addquestion-form">
+                <form action="{{$url}}/addquestion" method="get">
                     <div class="form-group">
-                        <label for="titlequestion">Name of room</label>
+                        <label for="titlequestion">Enter question</label>
                         <textarea type="text" class="form-control textarea-none-resize" id="titlequestion" placeholder="Enter question" name="titlequestion" rows="5" required></textarea>
                     </div>
                     <div class="row">
@@ -130,7 +128,7 @@
                                 <div class="card">
                                     <div class="card-body d-block">
                                         <div class="form-check mb-4">
-                                            <input class="form-check-input check-input-custom" type="radio" name="answer" id="answer{{$i+1}}" value="ans{{$i+1}}"}} title="Mark this as the correct answer" required>
+                                            <input class="form-check-input check-input-custom" type="radio" name="answer" id="answer{{$i+1}}" value="ans{{$i+1}}" title="Mark this as the correct answer" required>
                                         </div>
                                         <textarea type="text" class="form-control wrap-text text-center text-break textarea-none-resize col mt-5" placeholder="Answer {{$i+1}}" rows="4" required name="valueans{{$i+1}}"></textarea>
                                     </div>
