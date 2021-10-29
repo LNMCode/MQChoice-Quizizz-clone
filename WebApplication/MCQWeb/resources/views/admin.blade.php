@@ -103,6 +103,7 @@
                 <div class="text-center mt-5 mb-3">
                   <a href="/manageroom/create" class="btn btn-sm btn-primary">Create new room</a>
                   <a href="#" class="btn btn-sm btn-warning">Report contact</a>
+                  <a href="/signout" class="btn btn-sm btn-danger">Sign out</a>
                 </div>
               </div>
             </div>

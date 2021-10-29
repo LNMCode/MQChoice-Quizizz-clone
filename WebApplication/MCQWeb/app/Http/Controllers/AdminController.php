@@ -9,8 +9,8 @@ class AdminController extends Controller
 {
     public function index(Request $request){
         
-        $cookie = $_COOKIE['userLogin'];
-        if(isset($cookie)){
+        if(isset($_COOKIE['userLogin'])){
+            $cookie = $_COOKIE['userLogin'];
             $cookie = json_decode($cookie, true);
             $iduser = $cookie['iduser'];
             $username = $cookie['username'];

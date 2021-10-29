@@ -243,4 +243,8 @@ router.get('/updateroom', async(req, res) => {
     }
 })
 
+router.get('/createnewroom', async(req, res) => {
+
+})
+
 module.exports = router

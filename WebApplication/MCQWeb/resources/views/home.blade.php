@@ -11,9 +11,14 @@
     @section('header')
         <header>
             <a href="/" class="logo"><img src="../image/logo.jpg" alt=""></a>
-            <ul>
-                <li><a href="/entercode">Enter code</a></li>
-                <li><a href="/users/login" class="signup">Sign up ></a></li>
+            <ul>    
+                @if (isset($data))
+                    <li><a href="#">{{$data}}</a></li>
+                    <li><a href="/admin" class="signup">Admin ></a></li>
+                @else  
+                    <li><a href="/entercode">Enter code</a></li>
+                    <li><a href="/users/login" class="signup">Sign up ></a></li>
+                @endif
             </ul>
         </header>
     @endsection

@@ -25,6 +25,7 @@ use \App\Http\Controllers\Host\HostFlowRoomController;
 */
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/signout', [HomeController::class, 'signout']);
 
 Route::get('/users/login', [LoginController::class, 'index']);
 Route::post('/users/login', [LoginController::class, 'login']);
