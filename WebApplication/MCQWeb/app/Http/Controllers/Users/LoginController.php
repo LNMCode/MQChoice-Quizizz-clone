@@ -45,7 +45,6 @@ class LoginController extends Controller
         if (sizeof($ids) > 0){
             foreach($ids as $id){
                 $response = Http::post($url_current.'/room/getroombyid?idroom='.$id['idroom'].'&iduser='.$iduser);
-                echo $response;
                 if($response['message'] != 'fail') array_push($rooms, $response['doc']);
             }
         }

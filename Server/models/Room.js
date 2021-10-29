@@ -48,9 +48,12 @@ const RoomSchema = mongoose.Schema({
     ispublic: {
         type: Boolean
     },
-    isopen:{
+    isopen: {
         type: Boolean
+    },
+    description: {
+        type: String
     }
-}, {collection: 'room'});
+}, { collection: 'room' });
 
 module.exports = mongoose.model('Room', RoomSchema);
