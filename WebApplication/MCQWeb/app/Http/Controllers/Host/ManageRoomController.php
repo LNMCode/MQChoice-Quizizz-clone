@@ -15,19 +15,29 @@ class ManageRoomController extends Controller
             $cookie = json_decode($cookie, true);
             $iduser = $cookie['iduser'];
 
-            $response = Http::post($url_current.'/room/getroombyid?idroom='.$idroom.'&iduser='.$iduser);
-            if($response['message'] != 'fail'){
-                $room = $response['doc'];
+            if($idroom != 'create'){
+                $response = Http::post($url_current.'/room/getroombyid?idroom='.$idroom.'&iduser='.$iduser);
+                if($response['message'] != 'fail'){
+                    $room = $response['doc'];
+                    return view('host.manageroom',[
+                        'title' => 'Manage Room '.$idroom,
+                        'room' => $room,
+                        'url' => $url_current.'/room'
+                    ]);
+                }
+            } else {
                 return view('host.manageroom',[
-                    'title' => 'Manage Room '.$idroom,
-                    'room' => $room
+                    'title' => 'Manage Room create new',
+                    'room' => null,
+                    'url' => $url_current.'/room'
                 ]);
             }
         }
 
         return view('host.manageroom', [
             'title' => 'Manage room',
-            'room' => null
+            'room' => null,
+            'url' => $url_current.'/room'
         ]);
     }
 }

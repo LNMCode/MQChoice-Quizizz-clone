@@ -17,8 +17,17 @@ const RoomSchema = mongoose.Schema({
             },
             valueans: {
                 type: String
+            },
+            color: {
+                type: String
             }
-        }]
+        }],
+        correct: {
+            type: String
+        },
+        time: {
+            type: String
+        }
     }],
     isstart: {
         type: Boolean

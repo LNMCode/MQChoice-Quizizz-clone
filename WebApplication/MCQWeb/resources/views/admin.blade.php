@@ -27,9 +27,6 @@
               <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                 <i class="fas fa-minus"></i>
               </button>
-              <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                <i class="fas fa-times"></i>
-              </button>
             </div>
           </div>
           <div class="card-body">
@@ -79,7 +76,7 @@
                                 <!-- /.user-block -->
                                 <p>{{$room['desription']}}</p>
                                 <p>
-                                  <a href="#" class="link-black text-sm"><i class="fas fa-edit mr-1"></i> Edit questions for room</a>
+                                  <a href="/manageroom/{{$room['idroom']}}" class="link-black text-sm"><i class="fas fa-edit mr-1"></i> Edit questions for room</a>
                                 </p>
                                 <a type="button" class="btn btn-primary" href="/host/{{$room['idroom']}}">Open room</a>
                             </div>
@@ -104,7 +101,7 @@
                   </p>
                 </div>
                 <div class="text-center mt-5 mb-3">
-                  <a href="#" class="btn btn-sm btn-primary">Create new room</a>
+                  <a href="/manageroom/create" class="btn btn-sm btn-primary">Create new room</a>
                   <a href="#" class="btn btn-sm btn-warning">Report contact</a>
                 </div>
               </div>
