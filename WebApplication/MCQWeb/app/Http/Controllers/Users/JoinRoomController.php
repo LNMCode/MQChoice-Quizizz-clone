@@ -16,6 +16,7 @@ class JoinRoomController extends Controller
         $idRoom =  $request->input('idroom');
         $url_current = 'http://127.0.0.1:3000';
         $iduser = time();
+        $isExist = $this->saveCookie($idRoom, $iduser, $nameUser);
         $response = Http::get($url_current.'/joinroom?idroom='.$idRoom);
         echo $response;
         if($response['message'] != 'fail'){
@@ -28,7 +29,6 @@ class JoinRoomController extends Controller
                         'title' => "Room is not open, please contact host room",
                     ]); 
                 }
-                $isExist = $this->saveCookie($idRoom, $iduser, $nameUser);
                 echo $isExist;
                 if($isExist){
                     $cookie = $_COOKIE['userRoom'];

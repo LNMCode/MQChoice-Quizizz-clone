@@ -30,7 +30,8 @@ class LoginController extends Controller
                         'title' => 'Admin page',
                         'data' => $user,
                         'rooms' => $rooms,
-                        'type' => gettype($rooms)
+                        'type' => gettype($rooms),
+                        'url' => $url_current.'/room'
                     ]);
                 }
             }

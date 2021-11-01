@@ -15,7 +15,7 @@ class ManageRoomController extends Controller
             $cookie = json_decode($cookie, true);
             $iduser = $cookie['iduser'];
 
-            if($idroom != 'create'){
+            if(isset($idroom)){
                 $response = Http::post($url_current.'/room/getroombyid?idroom='.$idroom.'&iduser='.$iduser);
                 if($response['message'] != 'fail'){
                     $room = $response['doc'];

@@ -244,7 +244,28 @@ router.get('/updateroom', async(req, res) => {
 })
 
 router.get('/createnewroom', async(req, res) => {
-
+    console.log(req.query);
+    try {
+        var nameroom = req.query.nameroom;
+        var description = req.query.description;
+        console.log(nameroom);
+        console.log(description);
+        await Room.create({
+            idroom: 'id' + Date.now(),
+            title: nameroom,
+            desription: description,
+            isstart: false,
+            imageUrl: 'null',
+            ispublic: true,
+            isopen: false
+        })
+        res.writeHead(302, {
+            'Location': 'http://localhost:8000/admin'
+        });
+        res.end();
+    } catch (error) {
+        console.log({ message: err });
+    }
 })
 
 module.exports = router

@@ -1,5 +1,96 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:200,300,400,500,600,700,800,900&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
 
+body {
+    overflow-x: hidden;
+    background: url('../../image/background-1.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+}
 
-.id-room-access, .id-user-access{
-    display: none;
+:root {
+    --black: #333;
+    --yellow: #ffa200;
+    --yellow2: #ffbf75;
+    --white: #fff;
+    --white2: #fff;
+    --black2: #333;
+}
+
+section {
+    position: relative;
+    width: 100%;
+    padding: 0 100px 100px 100px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.board {
+    width: 400px;
+    border-radius: 16px;
+    background: linear-gradient(to bottom, #434343 0%, #000 100%);
+    margin: 0 auto;
+    color: white;
+    text-align: center;
+    padding: 20px 0px;
+}
+
+.board .idroom {
+    width: 300px;
+    background: var(--white);
+    color: var(--black);
+    margin: 10px auto;
+    border-radius: 15px;
+    line-height: 56px;
+    letter-spacing: 8px;
+    font-weight: 600;
+    font-size: 35px;
+    text-align: center;
+}
+
+.board-player {
+    border-radius: 8 px 8 px 0 0;
+    height: calc(100 vh - 415 px);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.board-player p {
+    height: 64px;
+    line-height: 64px;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    margin-top: 40px;
+}
+
+.container-players-accesss {
+    display: flex;
+}
+
+.container-players-accesss div {
+    width: 300px;
+    height: 96px;
+    border-radius: 24px;
+    padding: 15px 30px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+    margin: 16px;
+    position: relative;
+    color: white;
+}
+
+.container-players-accesss div img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 3px solid #fff;
 }

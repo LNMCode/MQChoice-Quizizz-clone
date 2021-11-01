@@ -101,7 +101,7 @@
                   </p>
                 </div>
                 <div class="text-center mt-5 mb-3">
-                  <a href="/manageroom/create" class="btn btn-sm btn-primary">Create new room</a>
+                  <button class="btn btn-sm btn-primary" onclick="onShowContainer()">Create new room</button>
                   <a href="#" class="btn btn-sm btn-warning">Report contact</a>
                   <a href="/signout" class="btn btn-sm btn-danger">Sign out</a>
                 </div>
@@ -111,10 +111,30 @@
           <!-- /.card-body -->
         </div>
         <!-- /.card -->
-  
       </section>
+      <!-- Add new room -->
+      <div class="container-add-room invisible" id="container-add-room">
+        <section>
+            <div>
+                <form action="{{$url}}/createnewroom" method="get">                  
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Name of room</label>
+                        <input type="text" class="form-control" id="nameroom" aria-describedby="nameRoomHelp" placeholder="Enter name of room" name="nameroom">
+                        <small id="nameRoomHelp" class="form-text text-muted">This is name for room of you, you can change after created.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="descriptionroom">Enter description of room</label>
+                        <textarea type="text" class="form-control textarea-none-resize" id="descriptionroom" placeholder="Enter description of room" name="description" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary d-block mx-auto">Save</button>
+                </form>
+                <button class="btn btn-primary mt-3" onclick="onHideContainer()">Cancel</button>
+            </div>
+        </section>
+    </div>
 
     @include('foot')
     <script src="../../js/admin.js"></script>
+    <script src="../../js/adminv-2.js"></script>
 </body>
 </html>

@@ -53803,3 +53803,47 @@ a.text-muted:hover {
 
 
 /*# sourceMappingURL=adminlte.min.css.map */
+
+.container-add-room {
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.container-add-room section {
+    position: relative;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    background-color: sandybrown;
+}
+
+.container-add-room section div {
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.container-add-room-animshow {
+    -webkit-animation: addquestionshow 0.5s;
+}
+
+@-webkit-keyframes addquestionshow {
+    0% {
+        top: 100%;
+    }
+    100% {
+        top: 0px;
+    }
+}
+
+.textarea-none-resize {
+    resize: none;
+}
+
+.check-input-custom {
+    width: 25px;
+    height: 25px;
+    right: 0;
+}
