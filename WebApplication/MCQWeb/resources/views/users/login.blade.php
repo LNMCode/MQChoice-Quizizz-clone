@@ -10,7 +10,7 @@
             <a href="/" class="logo"><img src="../image/logo.jpg" alt=""></a>
             <ul>
                 <li><a href="/entercode">Enter code</a></li>
-                <li><a href="/users/login" class="signup">Sign up ></a></li>
+                <li><a href="/users/login" class="signup">Sign in ></a></li>
             </ul>
         </header>
     @endsection

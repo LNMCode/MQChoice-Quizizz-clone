@@ -18,7 +18,7 @@ class JoinRoomController extends Controller
         $iduser = time();
         $isExist = $this->saveCookie($idRoom, $iduser, $nameUser);
         $response = Http::get($url_current.'/joinroom?idroom='.$idRoom);
-        echo $response;
+        #echo $response;
         if($response['message'] != 'fail'){
             $room = $response['doc'];
             $isResetPlay = false;

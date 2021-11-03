@@ -30,12 +30,7 @@
             <br>
             <p>Chờ người tham gia vào phòng</p>
         </div>
-        <div class="container-players-accesss" id="containerplayerslist">
-            <div>
-                <img src="../image/userjoin/img{{rand(1,6)}}.jpg">
-                <span>Phi Long</span>
-            </div>
-        </div>
+        <div class="container-players-accesss row" id="containerplayerslist"></div>
     @endsection
 
     <section>

@@ -17,7 +17,7 @@
                     <li><a href="/admin" class="signup">Admin ></a></li>
                 @else  
                     <li><a href="/entercode">Enter code</a></li>
-                    <li><a href="/users/login" class="signup">Sign up ></a></li>
+                    <li><a href="/users/login" class="signup">Sign in ></a></li>
                 @endif
             </ul>
         </header>

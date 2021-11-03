@@ -126,6 +126,7 @@
                         <label for="descriptionroom">Enter description of room</label>
                         <textarea type="text" class="form-control textarea-none-resize" id="descriptionroom" placeholder="Enter description of room" name="description" rows="5" required></textarea>
                     </div>
+                    <input type="text" class="invisible d-none" value="{{$data['id']}}" name="iduser">
                     <button type="submit" class="btn btn-primary d-block mx-auto">Save</button>
                 </form>
                 <button class="btn btn-primary mt-3" onclick="onHideContainer()">Cancel</button>

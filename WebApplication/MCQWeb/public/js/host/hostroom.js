@@ -16,8 +16,9 @@ socket.on('playerJoinRoom' + idroom, (data) => {
     console.log(data.iduser);
     var container = document.getElementById('containerplayerslist');
     var div = document.createElement('div');
+    div.classList.add('col-2');
     var img = document.createElement('img');
-    img.src = '../image/userjoin/img' + Math.floor(Math.random() * 11) + '.jpg';
+    img.src = '../image/userjoin/img' + data.iduser.charAt(iduser.length) + '.jpg';
     var nameuser = document.createElement('span');
     nameuser.innerText = data.nameuser;
     div.appendChild(img);

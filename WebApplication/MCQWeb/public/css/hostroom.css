@@ -55,8 +55,8 @@ section {
 }
 
 .board-player {
-    border-radius: 8 px 8 px 0 0;
-    height: calc(100 vh - 415 px);
+    border-radius: 8px 8px 0 0;
+    height: calc(100vh - 415px);
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
 }
 
@@ -70,7 +70,7 @@ section {
 }
 
 .container-players-accesss {
-    display: flex;
+    width: 100%;
 }
 
 .container-players-accesss div {

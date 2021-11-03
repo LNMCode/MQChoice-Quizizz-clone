@@ -1,9 +1,9 @@
 const ip_address = '127.0.0.1'
 const socket_port = '3000'
 
-var idroom = document.getElementById('idroom').innerText
-var iduser = document.getElementById('iduser').innerText
-var nameuser = document.getElementById('nameuser').innerText
+var idroom = document.getElementById('idroom').innerHTML
+var iduser = document.getElementById('iduser').innerHTML
+var nameuser = document.getElementById('nameuser').innerHTML
 
 console.log(idroom);
 console.log(iduser);
@@ -17,13 +17,12 @@ socket.emit('waitRoomSendFromClient', {
 
 socket.on('waitStartRoom' + idroom, (idroom) => {
     console.log('start room');
-    window.location.replace('http://127.0.0.1:8000/users/joinroom/start?idroom='+idroom);
+    window.location.replace('http://127.0.0.1:8000/users/joinroom/start?idroom=' + idroom);
 });
 
-function onClickAns(idroom, iduser, idques, idans, value){
+function onClickAns(idroom, iduser, idques, idans, value) {
     socket.emit(
-        'sendToServer', 
-        {  
+        'sendToServer', {
             'idroom': idroom,
             'iduser': iduser,
             'nameuser': nameuser,

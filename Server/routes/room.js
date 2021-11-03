@@ -248,10 +248,14 @@ router.get('/createnewroom', async(req, res) => {
     try {
         var nameroom = req.query.nameroom;
         var description = req.query.description;
+        var iduser = req.query.iduser;
+        var idnewroom = Math.floor(Math.random() * (99999999 - 12345678) + 12345678);
+
         console.log(nameroom);
         console.log(description);
+
         await Room.create({
-            idroom: 'id' + Date.now(),
+            idroom: idnewroom,
             title: nameroom,
             desription: description,
             isstart: false,
@@ -259,8 +263,15 @@ router.get('/createnewroom', async(req, res) => {
             ispublic: true,
             isopen: false
         })
+        await Users.findOneAndUpdate({ id: iduser }, {
+            $push: {
+                rooms: {
+                    idroom: idnewroom
+                }
+            }
+        })
         res.writeHead(302, {
-            'Location': 'http://localhost:8000/admin'
+            'Location': 'http://localhost:8000/manageroom/' + idnewroom
         });
         res.end();
     } catch (error) {
