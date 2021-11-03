@@ -78,7 +78,11 @@
                                 <p>
                                   <a href="/manageroom/{{$room['idroom']}}" class="link-black text-sm"><i class="fas fa-edit mr-1"></i> Edit questions for room</a>
                                 </p>
-                                <a type="button" class="btn btn-primary" href="/host/{{$room['idroom']}}">Open room</a>
+                                <a type="button" class="btn btn-primary {{sizeof($room['data']) > 0 ? '' : 'disabled'}}" href="/host/{{$room['idroom']}}">Open room</a>
+                                <button type="button" class="btn btn-danger" onclick="deleteRoom({{$room['idroom']}})">Delete room</button>
+                                @if (sizeof($room['data']) <= 0)
+                                    <small class="form-text text-muted">Please add some question to open this room</small>                                    
+                                @endif
                             </div>
                         @endforeach
                     @else

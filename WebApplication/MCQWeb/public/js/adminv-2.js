@@ -15,3 +15,7 @@ function onShowContainer() {
     container.classList.add('visible');
     container.classList.add('container-add-room-animshow');
 }
+
+function deleteRoom(idroom) {
+    console.log(idroom);
+}
