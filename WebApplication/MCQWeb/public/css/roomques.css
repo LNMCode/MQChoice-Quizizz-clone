@@ -1,5 +1,93 @@
+html,
+body {
+    position: relative;
+    height: 100%;
+}
 
+.id-room-accesss,
+.id-player-accesss {
+    height: 0px;
+}
 
-.id-room-access, .id-player-access{
-    display: none;
+body {
+    background: url('../../image/background-2.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+    padding: 0;
+    overflow-y: hidden;
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    color: white;
+}
+
+.swiper-slide section {
+    width: 100%;
+    padding: 10px;
+}
+
+.swiper-slide .container-text {
+    position: relative;
+    width: 100%;
+    height: 20em;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide .option-ans {
+    height: 20em;
+    padding: 5px;
+}
+
+.swiper-slide .option-ans button {
+    width: 100%;
+    height: 100%;
+    color: white;
+}
+
+.round-time-bar {
+    overflow: hidden;
+}
+
+.round-time-bar div {
+    height: 5px;
+    animation: roundtime calc(var(--duration) * 1s) steps(var(--duration)) forwards;
+    transform-origin: left center;
+    background: linear-gradient(to bottom, rgb(252, 235, 0), rgb(255, 230, 5));
+    border-radius: 10px;
+}
+
+.round-time-bar[data-style="smooth"] div {
+    animation: roundtime calc(var(--duration) * 1s) linear forwards reverse;
+}
+
+.round-time-bar[data-style="fixed"] div {
+    width: calc(var(--duration) * 5%);
+}
+
+.round-time-bar[data-color="blue"] div {
+    background: linear-gradient(to bottom, #64b5f6, #1565c0);
+}
+
+@keyframes roundtime {
+    to {
+        /* More performant than `width` */
+        transform: scaleX(0);
+    }
 }

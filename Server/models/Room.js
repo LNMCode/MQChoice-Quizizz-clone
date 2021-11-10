@@ -20,6 +20,9 @@ const RoomSchema = mongoose.Schema({
             },
             color: {
                 type: String
+            },
+            color_v2: {
+                typeof: String,
             }
         }],
         correct: {

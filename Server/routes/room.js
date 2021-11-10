@@ -167,22 +167,26 @@ router.get('/updatequestion', async(req, res) => {
                 'data.$[inner].ans': [{
                         idans: 'ans1',
                         valueans: ans1,
-                        color: answer === 'ans1' ? 'green' : 'red'
+                        color: answer === 'ans1' ? 'green' : 'red',
+                        color_v2: 'primary'
                     },
                     {
                         idans: 'ans2',
                         valueans: ans2,
-                        color: answer === 'ans2' ? 'green' : 'red'
+                        color: answer === 'ans2' ? 'green' : 'red',
+                        color_v2: 'info'
                     },
                     {
                         idans: 'ans3',
                         valueans: ans3,
-                        color: answer === 'ans3' ? 'green' : 'red'
+                        color: answer === 'ans3' ? 'green' : 'red',
+                        color_v2: 'warning'
                     },
                     {
                         idans: 'ans4',
                         valueans: ans4,
-                        color: answer === 'ans4' ? 'green' : 'red'
+                        color: answer === 'ans4' ? 'green' : 'red',
+                        color_v2: 'danger'
                     }
                 ]
             }

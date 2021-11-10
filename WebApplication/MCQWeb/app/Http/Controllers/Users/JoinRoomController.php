@@ -25,11 +25,12 @@ class JoinRoomController extends Controller
             
             if (isset($room)){
                 if(!$room['isopen']){
+                    $this->removeCookie();
                     return view('users.entercode', [
                         'title' => "Room is not open, please contact host room",
                     ]); 
                 }
-                echo $isExist;
+                //echo $isExist;
                 if($isExist){
                     $cookie = $_COOKIE['userRoom'];
                     $cookie = json_decode($cookie, true);
@@ -37,7 +38,7 @@ class JoinRoomController extends Controller
                     $nameuser = $cookie['nameuser'];
                     if($this->checkUserExist($room['players'], $iduser)){
                         // Hoi co muon reset hay continous
-                        print('Da ton tai tai khoan');
+                        //print('Da ton tai tai khoan');
                         // Check them la da played chua,
                         // neu roi chi ms hoi
                         if($room['isstart']){
@@ -65,7 +66,7 @@ class JoinRoomController extends Controller
                         // Throw error not availble in server
                     }
                 } else {
-                    print('Chua ton tai tai khoan');
+                    //print('Chua ton tai tai khoan');
                     //insert user
                     $this->insertUserToRoom($url_current,$idRoom, $iduser, $nameUser);
                     if(!$room['isstart']){
@@ -78,7 +79,7 @@ class JoinRoomController extends Controller
                             'isCheckStart' => false
                         ]);       
                     }else {
-                        print('Chuyen thang qua luon vi bat dau roi');
+                        //print('Chuyen thang qua luon vi bat dau roi');
                         return view('users.roomques', [
                             'title' => 'Room Started',
                             'idroom' => $idRoom,
@@ -92,6 +93,9 @@ class JoinRoomController extends Controller
         }
 
         // return view not have room (todo) will edit return
+        return view('users.entercode', [
+            'title' => "Room not available",
+        ]); 
     }
 
     private function checkUserExist(array $users, $id){
@@ -115,10 +119,17 @@ class JoinRoomController extends Controller
         $cookie_name = 'userRoom';
         $cookie_value = ['idroom' => $idroom, 'iduser' => $iduser, 'nameuser' => $nameuser];
         if(!isset($_COOKIE[$cookie_name])) {
-            echo "Cookie named '" . $cookie_name . "' is not set!";
+            //echo "Cookie named '" . $cookie_name . "' is not set!";
             setcookie($cookie_name, json_encode($cookie_value), time() + (86400 * 30), "/"); // 86400 = 1 day
             return false;
         }
         return true;
+    }
+
+    private function removeCookie(){
+        if(isset($_COOKIE['userRoom'])){
+            setcookie('userRoom', '' , time() - 3600);
+            unset($cookie);
+        }
     }
 }

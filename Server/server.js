@@ -6,15 +6,18 @@ const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 
 const express = require('express')
 const app = express()
+var device = require('express-device')
+app.use(device.capture())
+
 app.set('port', process.env.PORT || 3000);
 
 const http = require('http')
 const server = http.createServer(app).listen(app.get('port'), () => {
-    console.log("Express server listening on port " + app.get('port'));
+    console.log('Express server listening on ' + ':' + app.get('port'));
 })
 
 const io = require('socket.io')(server, {
-    cors: { origin: "*"}
+    cors: { origin: "*" }
 });
 
 const cors = require('cors');
@@ -36,7 +39,7 @@ app.use('/room', roomRouter);
 const answerRouter = require('./routes/answer')
 app.use('/answer', answerRouter);
 
-app.get('/', (req, res) =>{
+app.get('/', (req, res) => {
     res.send('This is home')
 });
 
@@ -58,10 +61,11 @@ io.on('connection', (socket) => {
         console.log(iduser);
 
         socket.join(idroom + 'wait')
-        socket.to(idroom + 'wait').emit('playerJoinRoom' + idroom, {idroom: idroom, iduser: iduser, nameuser: nameuser});
+        socket.to(idroom + 'wait').emit('playerJoinRoom' + idroom, { idroom: idroom, iduser: iduser, nameuser: nameuser });
     });
 
     // Host open a room wait
+    // And join a room wait, same with players
     socket.on('hostOpenRoom', (data) => {
         var idroom = data.idroom;
         var iduser = data.iduser;
@@ -108,9 +112,9 @@ io.on('connection', (socket) => {
     })
 })
 
-function sendAnswerToServer(method, url, data){
+function sendAnswerToServer(method, url, data) {
     const promise = new Promise((resolve, reject) => {
-        var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+        var xmlhttp = new XMLHttpRequest(); // new HttpRequest instance 
         var theUrl = "http://127.0.0.1:3000/" + url;
         xmlhttp.open(method, theUrl);
         xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -119,7 +123,7 @@ function sendAnswerToServer(method, url, data){
     return promise;
 }
 
-function getIdsUserSocketByIdRoom(method, url, idroom){
+function getIdsUserSocketByIdRoom(method, url, idroom) {
 
 }
 
