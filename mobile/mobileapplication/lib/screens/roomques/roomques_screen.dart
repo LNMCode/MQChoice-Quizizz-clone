@@ -1,16 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobileapplication/blocs/getroom_bloc.dart';
-import 'package:mobileapplication/events/getroom_event.dart';
-import 'package:mobileapplication/states/getroom_state.dart';
 
-class EnterCodeScreen extends StatefulWidget {
+import 'package:mobileapplication/screens/roomques/blocs/getroom/getroom_bloc.dart';
+import 'package:mobileapplication/screens/roomques/blocs/getroom/getroom_event.dart';
+import 'package:mobileapplication/screens/roomques/blocs/getroom/getroom_state.dart';
+
+class RoomQuesScreen extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _EnterCodeScreenState();
+  State<StatefulWidget> createState() => _RoomQuesScreenState();
 }
 
-class _EnterCodeScreenState extends State<EnterCodeScreen> {
+class _RoomQuesScreenState extends State<RoomQuesScreen> {
   @override
   void initState() {
     super.initState();

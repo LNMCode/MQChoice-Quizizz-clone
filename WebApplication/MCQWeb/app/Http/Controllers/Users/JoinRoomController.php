@@ -17,7 +17,7 @@ class JoinRoomController extends Controller
         $url_current = 'http://127.0.0.1:3000';
         $iduser = time();
         $isExist = $this->saveCookie($idRoom, $iduser, $nameUser);
-        $response = Http::get($url_current.'/joinroom?idroom='.$idRoom);
+        $response = Http::get($url_current.'/joinroom/getroom?idroom='.$idRoom);
         #echo $response;
         if($response['message'] != 'fail'){
             $room = $response['doc'];

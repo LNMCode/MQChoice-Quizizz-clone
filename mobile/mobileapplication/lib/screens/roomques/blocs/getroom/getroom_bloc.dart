@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
-import 'package:mobileapplication/events/getroom_event.dart';
-import 'package:mobileapplication/models/room_response.dart';
-import 'package:mobileapplication/responsitory/repository.dart';
-import 'package:mobileapplication/states/getroom_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:mobileapplication/screens/roomques/blocs/getroom/getroom_event.dart';
+import 'package:mobileapplication/screens/roomques/blocs/getroom/getroom_state.dart';
+
+import 'package:mobileapplication/responsitory/repository.dart';
+import 'package:mobileapplication/models/getroom/room_response.dart';
 
 class GetRoomBloc extends Bloc<GetRoomEvent, GetRoomState> {
   final Repository repository;
@@ -16,8 +18,8 @@ class GetRoomBloc extends Bloc<GetRoomEvent, GetRoomState> {
     if (getRoomEvent is GetRoomEventRequested) {
       yield GetRoomStateLoading();
       try {
-        final Room_Response? room_response =
-            await repository.getques(getRoomEvent.idroom);
+        final RoomResponse? room_response =
+            await repository.getRoom(getRoomEvent.idroom);
         if (room_response != null) {
           yield GetRoomStateSuccess(room_response);
         } else {

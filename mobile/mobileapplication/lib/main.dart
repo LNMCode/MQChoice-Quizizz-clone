@@ -1,17 +1,32 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:mobileapplication/blocs/getroom_bloc.dart';
-import 'package:mobileapplication/blocs/getroom_bloc_observer.dart';
-import 'package:mobileapplication/responsitory/repository.dart';
 import 'package:http/http.dart' as http;
-import 'package:mobileapplication/screens/entercode_screen.dart';
+import 'package:mobileapplication/screens/entercode/blocs/entercode/entercode_bloc.dart';
+
+import 'package:mobileapplication/screens/entercode/entercode_screen.dart';
+import 'package:mobileapplication/screens/roomques/roomques_screen.dart';
+
+import 'package:mobileapplication/screens/roomques/blocs/getroom/getroom_bloc.dart';
+import 'package:mobileapplication/screens/roomques/blocs/getroom/getroom_bloc_observer.dart';
+
+import 'package:mobileapplication/responsitory/repository.dart';
 
 void main() {
   Bloc.observer = GetRoomBlocObserver();
   final Repository repository = Repository(http.Client());
-  runApp(MyApp(
-    repository: repository,
-  ));
+
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<EnterCodeBloc>(
+          create: (context) => EnterCodeBloc(repository: repository),
+        ),
+      ],
+      child: MyApp(
+        repository: repository,
+      ),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

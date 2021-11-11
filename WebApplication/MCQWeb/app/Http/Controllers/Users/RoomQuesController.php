@@ -11,7 +11,7 @@ class RoomQuesController extends Controller
     public function index(Request $request){
         $idroom = $request->idroom;
         $url_current = 'http://127.0.0.1:3000';
-        $response = Http::get($url_current.'/joinroom/getques?idroom='.$idroom);
+        $response = Http::get($url_current.'/joinroom/getroom?idroom='.$idroom);
         $isExits = $this->checkCookieExist();
         if($response['message'] != 'fail' && $isExits){
             $cookie = $_COOKIE['userRoom'];

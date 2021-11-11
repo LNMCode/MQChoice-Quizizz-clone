@@ -4,24 +4,26 @@ const Room = require('../models/Room');
 
 const router = express.Router();
 
+// Check room is avaliable or open to change view
 router.get('/', async(req, res) => {
     try {
         console.log(req.query.idroom);
         $idroom = req.query.idroom;
         await Room.findOne({ idroom: $idroom }).then((doc) => {
-            console.log(doc);
-            if (doc == null) {
-                res.json({ message: 'fail', doc: {} });
+            if (doc != null) {
+                doc = doc.toObject()
+                console.log(doc.idroom)
+                res.json({ message: doc.isopen ? 'Ok' : 'Room not openning', isgo: doc.isopen });
             } else {
-                res.json({ message: 'ok', doc: doc });
+                res.json({ message: 'Room not available', isgo: false });
             }
         });
     } catch (err) {
-        res.json({ message: err });
+        res.json({ message: 'Error ' + err, isgo: false });
     }
 });
 
-router.get('/getques', async(req, res) => {
+router.get('/getroom', async(req, res) => {
     try {
         console.log(req.query.idroom);
         $idroom = req.query.idroom;
