@@ -10,20 +10,30 @@ import 'package:mobileapplication/screens/roomques/blocs/getroom/getroom_bloc.da
 import 'package:mobileapplication/screens/roomques/blocs/getroom/getroom_bloc_observer.dart';
 
 import 'package:mobileapplication/responsitory/repository.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 void main() {
   Bloc.observer = GetRoomBlocObserver();
   final Repository repository = Repository(http.Client());
+  final SocketRepository socket = SocketRepository();
+  final String iduser = DateTime.now().microsecondsSinceEpoch.toString();
 
   runApp(
     MultiBlocProvider(
       providers: [
         BlocProvider<EnterCodeBloc>(
-          create: (context) => EnterCodeBloc(repository: repository),
+          create: (context) => EnterCodeBloc(
+            repository: repository,
+            socket: socket,
+          ),
         ),
+        BlocProvider<GetRoomBloc>(
+          create: (context) => GetRoomBloc(repository),
+        )
       ],
       child: MyApp(
         repository: repository,
+        iduser: iduser,
       ),
     ),
   );
@@ -31,17 +41,24 @@ void main() {
 
 class MyApp extends StatelessWidget {
   final Repository repository;
-  const MyApp({Key? key, required this.repository})
-      : assert(repository != null),
-        super(key: key);
+  final String iduser;
+
+  const MyApp({
+    Key? key,
+    required this.repository,
+    required this.iduser,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print('Main' + iduser);
     return MaterialApp(
       title: 'Material app',
       home: BlocProvider(
         create: (context) => GetRoomBloc(repository),
-        child: EnterCodeScreen(),
+        child: EnterCodeScreen(
+          iduser: iduser,
+        ),
       ),
     );
   }

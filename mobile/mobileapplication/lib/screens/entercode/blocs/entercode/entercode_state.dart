@@ -8,6 +8,7 @@ class EnterCodeState extends Equatable {
   List<Object?> get props => [];
 }
 
+// Enter code check idroom
 class EnterCodeStateSuccess extends EnterCodeState {
   final EnterCodeResponse checkIdRoomResponse;
   const EnterCodeStateSuccess(this.checkIdRoomResponse);
@@ -19,3 +20,10 @@ class EnterCodeStateSuccess extends EnterCodeState {
 class EnterCodeStateLoading extends EnterCodeState {}
 
 class EnterCodeStateFail extends EnterCodeState {}
+
+// Enter code connect to socket io
+class EnterCodeConnectSocketLoading extends EnterCodeState {}
+
+class EnterCodeConnectSocketFail extends EnterCodeState {}
+
+class EnterCodeConnectSocketSuccess extends EnterCodeState {}

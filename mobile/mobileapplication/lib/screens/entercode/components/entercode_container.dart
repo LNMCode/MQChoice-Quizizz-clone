@@ -8,6 +8,7 @@ import 'package:mobileapplication/screens/entercode/blocs/entercode/entercode_ev
 import 'package:mobileapplication/screens/entercode/blocs/entercode/entercode_state.dart';
 
 var _textEnterCode;
+var _textNameUser;
 
 class EnterCodeContainer extends StatelessWidget {
   @override
@@ -65,7 +66,17 @@ class _Form extends StatelessWidget {
       children: <Widget>[
         Column(
           children: <Widget>[
-            _Input(),
+            _Input(
+              hintText: 'Enter a code game',
+              onChanged: (value) {
+                _textEnterCode = value;
+              },
+            ),
+            _Input(
+                hintText: 'Enter a name',
+                onChanged: (value) {
+                  _textNameUser = value;
+                }),
             _Button(),
           ],
         ),
@@ -75,13 +86,19 @@ class _Form extends StatelessWidget {
 }
 
 class _Input extends StatelessWidget {
+  final String hintText;
+  final ValueChanged<String> onChanged;
+
+  const _Input({
+    required this.hintText,
+    required this.onChanged,
+  });
+
   @override
   Widget build(BuildContext context) {
     return RoundedInputField(
-      hintText: "Enter a game code",
-      onChanged: (value) {
-        _textEnterCode = value;
-      },
+      hintText: hintText,
+      onChanged: onChanged,
     );
   }
 }
@@ -96,7 +113,7 @@ class _Button extends StatelessWidget {
           isLoading: state is EnterCodeStateLoading,
           press: () {
             print(_textEnterCode);
-            if (_textEnterCode != null) {
+            if (_textEnterCode != null && _textNameUser != null) {
               BlocProvider.of<EnterCodeBloc>(context)
                   .add(EnterCodeSumitted(_textEnterCode.toString().trim()));
             }

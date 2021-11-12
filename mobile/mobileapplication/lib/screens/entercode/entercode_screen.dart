@@ -11,11 +11,23 @@ import 'package:mobileapplication/screens/roomques/roomques_screen.dart';
 import 'package:flutter/services.dart';
 
 class EnterCodeScreen extends StatefulWidget {
+  final String iduser;
+
+  const EnterCodeScreen({
+    required this.iduser,
+  });
+
   @override
-  State<StatefulWidget> createState() => _EnterCodeScreenState();
+  State<StatefulWidget> createState() => _EnterCodeScreenState(iduser: iduser);
 }
 
 class _EnterCodeScreenState extends State<EnterCodeScreen> {
+  final String iduser;
+
+  _EnterCodeScreenState({
+    required this.iduser,
+  });
+
   @override
   void initState() {
     super.initState();
@@ -50,7 +62,9 @@ class _EnterCodeScreenState extends State<EnterCodeScreen> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) {
-                  return RoomQuesScreen();
+                  return RoomQuesScreen(
+                    iduser: iduser,
+                  );
                 }),
               );
             }

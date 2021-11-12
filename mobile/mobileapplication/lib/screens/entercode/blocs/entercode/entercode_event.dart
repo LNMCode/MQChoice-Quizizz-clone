@@ -14,3 +14,18 @@ class EnterCodeSumitted extends EnterCodeEvent {
   @override
   List<Object?> get props => [idroom];
 }
+
+class EnterCodeConnectedSocket extends EnterCodeEvent {
+  final String idroom;
+  final String iduser;
+  final String nameuser;
+
+  const EnterCodeConnectedSocket({
+    required this.idroom,
+    required this.iduser,
+    required this.nameuser,
+  });
+
+  @override
+  List<Object?> get props => [idroom, iduser, nameuser];
+}

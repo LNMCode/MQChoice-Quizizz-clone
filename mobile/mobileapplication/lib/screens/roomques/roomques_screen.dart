@@ -7,11 +7,23 @@ import 'package:mobileapplication/screens/roomques/blocs/getroom/getroom_event.d
 import 'package:mobileapplication/screens/roomques/blocs/getroom/getroom_state.dart';
 
 class RoomQuesScreen extends StatefulWidget {
+  final String iduser;
+
+  const RoomQuesScreen({
+    required this.iduser,
+  });
+
   @override
-  State<StatefulWidget> createState() => _RoomQuesScreenState();
+  State<StatefulWidget> createState() => _RoomQuesScreenState(iduser: iduser);
 }
 
 class _RoomQuesScreenState extends State<RoomQuesScreen> {
+  final String iduser;
+
+  _RoomQuesScreenState({
+    required this.iduser,
+  });
+
   @override
   void initState() {
     super.initState();
@@ -19,6 +31,7 @@ class _RoomQuesScreenState extends State<RoomQuesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print('Room quest' + iduser);
     return Scaffold(
       appBar: AppBar(
         title: Text('This is title of appBar'),
@@ -41,13 +54,19 @@ class _RoomQuesScreenState extends State<RoomQuesScreen> {
               return Text('Something went wrong');
             }
             return Center(
-                child: TextButton(
-              onPressed: () {
-                BlocProvider.of<GetRoomBloc>(context)
-                    .add(GetRoomEventRequested('id123456'));
-              },
-              child: Text('TextButton'),
-            ));
+              child: TextButton(
+                onPressed: () {
+                  BlocProvider.of<GetRoomBloc>(context)
+                      .add(GetRoomEventRequested('id123456'));
+                },
+                child: Column(
+                  children: [
+                    Text('TextButton'),
+                    Text(iduser),
+                  ],
+                ),
+              ),
+            );
           },
         ),
       ),
