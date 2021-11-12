@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:mobileapplication/models/checkidroom/entercode_response.dart';
 import 'package:mobileapplication/models/getroom/room_response.dart';
 
-const baseUrl = 'http://192.168.1.82:3000';
+const baseUrl = 'http://172.16.1.80:3000';
 
 class Repository {
   final Dio _dio = Dio();

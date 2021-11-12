@@ -13,7 +13,7 @@ router.get('/', async(req, res) => {
             if (doc != null) {
                 doc = doc.toObject()
                 console.log(doc.idroom)
-                res.json({ message: doc.isopen ? 'Ok' : 'Room not openning', isgo: doc.isopen });
+                res.json({ message: doc.isopen ? 'Ok' : 'Room not openningn', isgo: doc.isopen });
             } else {
                 res.json({ message: 'Room not available', isgo: false });
             }

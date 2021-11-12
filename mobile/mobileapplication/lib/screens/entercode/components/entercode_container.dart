@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobileapplication/components/constants.dart';
 import 'package:mobileapplication/components/rounded_button.dart';
 import 'package:mobileapplication/components/rounded_input_field.dart';
 import 'package:mobileapplication/screens/entercode/blocs/entercode/entercode_bloc.dart';
@@ -46,7 +47,7 @@ class _Body extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
           decoration: BoxDecoration(
             color: const Color(0xFFF2F2F2),
-            border: Border.all(color: const Color(0xFFE6E6E6), width: 2),
+            border: Border.all(color: borderColor, width: 2),
             borderRadius: BorderRadius.circular(10),
           ),
           child: _Form(),
