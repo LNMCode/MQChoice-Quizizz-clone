@@ -10,20 +10,16 @@ class RoomQuesScreen extends StatefulWidget {
   final String iduser;
 
   const RoomQuesScreen({
+    Key? key,
     required this.iduser,
-  });
+  }) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _RoomQuesScreenState(iduser: iduser);
+  State<StatefulWidget> createState() => _RoomQuesScreenState();
 }
 
 class _RoomQuesScreenState extends State<RoomQuesScreen> {
-  final String iduser;
-
-  _RoomQuesScreenState({
-    required this.iduser,
-  });
-
+  
   @override
   void initState() {
     super.initState();
@@ -31,7 +27,7 @@ class _RoomQuesScreenState extends State<RoomQuesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('Room quest' + iduser);
+    print('Room quest' + widget.iduser);
     return Scaffold(
       appBar: AppBar(
         title: Text('This is title of appBar'),
@@ -62,7 +58,7 @@ class _RoomQuesScreenState extends State<RoomQuesScreen> {
                 child: Column(
                   children: [
                     Text('TextButton'),
-                    Text(iduser),
+                    Text(widget.iduser),
                   ],
                 ),
               ),

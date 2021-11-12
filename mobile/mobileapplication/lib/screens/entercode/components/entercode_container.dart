@@ -7,10 +7,18 @@ import 'package:mobileapplication/screens/entercode/blocs/entercode/entercode_bl
 import 'package:mobileapplication/screens/entercode/blocs/entercode/entercode_event.dart';
 import 'package:mobileapplication/screens/entercode/blocs/entercode/entercode_state.dart';
 
-var _textEnterCode;
-var _textNameUser;
-
 class EnterCodeContainer extends StatelessWidget {
+  final ValueChanged<String> onChangeEnterCode;
+  final ValueChanged<String> onChangeUserName;
+  final Function() onPress;
+
+  const EnterCodeContainer({
+    Key? key,
+    required this.onChangeEnterCode,
+    required this.onChangeUserName,
+    required this.onPress,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -18,12 +26,26 @@ class EnterCodeContainer extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 10),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       width: size.width,
-      child: _Body(),
+      child: _Body(
+        onChangeEnterCode: onChangeEnterCode,
+        onChangeUserName: onChangeUserName,
+        onPress: onPress,
+      ),
     );
   }
 }
 
 class _Body extends StatelessWidget {
+  final ValueChanged<String> onChangeEnterCode;
+  final ValueChanged<String> onChangeUserName;
+  final Function() onPress;
+
+  const _Body({
+    required this.onChangeEnterCode,
+    required this.onChangeUserName,
+    required this.onPress,
+  });
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -51,7 +73,11 @@ class _Body extends StatelessWidget {
             border: Border.all(color: borderColor, width: 2),
             borderRadius: BorderRadius.circular(10),
           ),
-          child: _Form(),
+          child: _Form(
+            onChangedEnterCode: onChangeEnterCode,
+            onChangeUserName: onChangeUserName,
+            onPress: onPress,
+          ),
         ),
         _NotificationResponse(),
       ],
@@ -60,6 +86,16 @@ class _Body extends StatelessWidget {
 }
 
 class _Form extends StatelessWidget {
+  final ValueChanged<String> onChangedEnterCode;
+  final ValueChanged<String> onChangeUserName;
+  final Function() onPress;
+
+  const _Form({
+    required this.onChangedEnterCode,
+    required this.onChangeUserName,
+    required this.onPress,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -68,16 +104,15 @@ class _Form extends StatelessWidget {
           children: <Widget>[
             _Input(
               hintText: 'Enter a code game',
-              onChanged: (value) {
-                _textEnterCode = value;
-              },
+              onChanged: onChangedEnterCode,
             ),
             _Input(
-                hintText: 'Enter a name',
-                onChanged: (value) {
-                  _textNameUser = value;
-                }),
-            _Button(),
+              hintText: 'Enter a name',
+              onChanged: onChangeUserName,
+            ),
+            _Button(
+              onPress: onPress,
+            ),
           ],
         ),
       ],
@@ -104,6 +139,12 @@ class _Input extends StatelessWidget {
 }
 
 class _Button extends StatelessWidget {
+  final Function() onPress;
+
+  const _Button({
+    required this.onPress,
+  });
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<EnterCodeBloc, EnterCodeState>(
@@ -111,13 +152,7 @@ class _Button extends StatelessWidget {
         return RoundedButton(
           text: 'Join a game',
           isLoading: state is EnterCodeStateLoading,
-          press: () {
-            print(_textEnterCode);
-            if (_textEnterCode != null && _textNameUser != null) {
-              BlocProvider.of<EnterCodeBloc>(context)
-                  .add(EnterCodeSumitted(_textEnterCode.toString().trim()));
-            }
-          },
+          press: onPress,
         );
       },
     );

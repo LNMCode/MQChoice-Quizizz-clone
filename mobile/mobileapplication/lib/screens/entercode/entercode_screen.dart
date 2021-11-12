@@ -5,28 +5,28 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobileapplication/components/constants.dart';
 import 'package:mobileapplication/components/rounded_button.dart';
 import 'package:mobileapplication/screens/entercode/blocs/entercode/entercode_bloc.dart';
+import 'package:mobileapplication/screens/entercode/blocs/entercode/entercode_event.dart';
 import 'package:mobileapplication/screens/entercode/blocs/entercode/entercode_state.dart';
 import 'package:mobileapplication/screens/entercode/components/entercode_container.dart';
 import 'package:mobileapplication/screens/roomques/roomques_screen.dart';
 import 'package:flutter/services.dart';
+import 'package:mobileapplication/screens/waitroom/waitroom_screen.dart';
 
 class EnterCodeScreen extends StatefulWidget {
   final String iduser;
 
   const EnterCodeScreen({
+    Key? key,
     required this.iduser,
-  });
+  }) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _EnterCodeScreenState(iduser: iduser);
+  State<StatefulWidget> createState() => _EnterCodeScreenState();
 }
 
 class _EnterCodeScreenState extends State<EnterCodeScreen> {
-  final String iduser;
-
-  _EnterCodeScreenState({
-    required this.iduser,
-  });
+  var _textEnterCode;
+  var _textNameUser;
 
   @override
   void initState() {
@@ -62,8 +62,10 @@ class _EnterCodeScreenState extends State<EnterCodeScreen> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) {
-                  return RoomQuesScreen(
-                    iduser: iduser,
+                  return WaitRoomScreen(
+                    iduser: widget.iduser,
+                    idroom: _textEnterCode,
+                    nameuser: _textNameUser,
                   );
                 }),
               );
@@ -73,7 +75,20 @@ class _EnterCodeScreenState extends State<EnterCodeScreen> {
         builder: (context, state) {
           return Container(
             child: Column(children: <Widget>[
-              EnterCodeContainer(),
+              EnterCodeContainer(
+                onChangeEnterCode: (value) {
+                  _textEnterCode = value;
+                },
+                onChangeUserName: (value) {
+                  _textNameUser = value;
+                },
+                onPress: () {
+                  if (_textEnterCode != null && _textNameUser != null) {
+                    BlocProvider.of<EnterCodeBloc>(context).add(
+                        EnterCodeSumitted(_textEnterCode.toString().trim()));
+                  }
+                },
+              ),
             ]),
           );
         },

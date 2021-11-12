@@ -50,6 +50,11 @@ mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () => {
 io.on('connection', (socket) => {
     console.log('Have user connected ' + socket.handshake.query.type);
 
+    socket.on('event', (data) => {
+        console.log(data);
+        socket.emit('event2', 'hhaa');
+    });
+
     // Player enjoy into a room wait
     socket.on('waitRoomSendFromClient', (data) => {
         var idroom = data.idroom;
