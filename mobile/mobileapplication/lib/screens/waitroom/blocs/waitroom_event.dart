@@ -8,4 +8,17 @@ abstract class WaitRoomEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class WaitRoomEventConnected extends WaitRoomEvent {}
+class WaitRoomEventConnected extends WaitRoomEvent {
+  final String idroom;
+  final String iduser;
+  final String nameuser;
+
+  const WaitRoomEventConnected({
+    required this.idroom,
+    required this.iduser,
+    required this.nameuser,
+  });
+
+  @override
+  List<Object?> get props => [idroom, iduser, nameuser];
+}

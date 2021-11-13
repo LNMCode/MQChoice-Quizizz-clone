@@ -37,6 +37,6 @@
         </div>
     </section>
 </body>
-<script src="https://cdn.socket.io/4.3.2/socket.io.min.js" integrity="sha384-KAZ4DtjNhLChOB/hxXuKqhMLYvx3b5MlT55xPEiNmREKRzeEm+RVPlTnAn0ajQNs" crossorigin="anonymous"></script>
+@include('socket')
 <script src="../../js/users/joinroom.js"></script>
 </html>

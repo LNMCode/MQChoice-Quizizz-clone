@@ -58,7 +58,7 @@ class _EnterCodeScreenState extends State<EnterCodeScreen> {
       body: BlocConsumer<EnterCodeBloc, EnterCodeState>(
         listener: (context, state) {
           if (state is EnterCodeStateSuccess) {
-            if (state.checkIdRoomResponse.isgo) {
+            if (state.enterCodeResponse.isgo) {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) {

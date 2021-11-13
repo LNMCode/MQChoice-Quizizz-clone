@@ -8,7 +8,7 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class EnterCodeBloc extends Bloc<EnterCodeEvent, EnterCodeState> {
   final Repository repository;
-  EnterCodeBloc({required this.repository}) : super(EnterCodeState());
+  EnterCodeBloc({required this.repository}) : super(const EnterCodeState());
 
   @override
   Stream<EnterCodeState> mapEventToState(EnterCodeEvent event) async* {

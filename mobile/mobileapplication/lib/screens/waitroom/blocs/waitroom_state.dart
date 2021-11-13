@@ -10,6 +10,7 @@ class WaitRoomState extends Equatable {
   List<Object?> get props => [];
 }
 
+// Connect to server socket to wait host start room
 class WaitRoomStateInitial extends WaitRoomState {}
 
 class WaitRoomStateFail extends WaitRoomState {}

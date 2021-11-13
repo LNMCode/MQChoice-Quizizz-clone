@@ -177,7 +177,7 @@ class _NotificationResponse extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(
-                state.checkIdRoomResponse.message,
+                state.enterCodeResponse.message,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 15,

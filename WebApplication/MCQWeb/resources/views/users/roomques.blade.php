@@ -35,7 +35,7 @@
         @endforeach
     </div>
 </body>
-<script src="https://cdn.socket.io/4.3.2/socket.io.min.js" integrity="sha384-KAZ4DtjNhLChOB/hxXuKqhMLYvx3b5MlT55xPEiNmREKRzeEm+RVPlTnAn0ajQNs" crossorigin="anonymous"></script>
+@include('socket')
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="../../js/users/roomques.js"></script>
 <!-- Initialize Swiper -->
