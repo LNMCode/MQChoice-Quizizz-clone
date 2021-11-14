@@ -7,6 +7,7 @@ import 'package:mobileapplication/responsitory/stream_socket.dart';
 import 'package:mobileapplication/screens/entercode/blocs/entercode/entercode_bloc.dart';
 
 import 'package:mobileapplication/screens/entercode/entercode_screen.dart';
+import 'package:mobileapplication/screens/roomques/blocs/question/question_bloc.dart';
 import 'package:mobileapplication/screens/roomques/roomques_screen.dart';
 
 import 'package:mobileapplication/screens/roomques/blocs/getroom/getroom_bloc.dart';
@@ -36,6 +37,10 @@ void main() {
         BlocProvider<WaitRoomBloc>(
           create: (context) => WaitRoomBloc(streamSocket, socket),
         ),
+        BlocProvider<QuestionBloc>(
+          create: (context) =>
+              QuestionBloc(repository: repository, socketRepository: socket),
+        )
       ],
       child: MyApp(
         repository: repository,
@@ -61,11 +66,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Material app',
       home: BlocProvider(
-        create: (context) => GetRoomBloc(repository),
-        child: EnterCodeScreen(
-          iduser: iduser,
-        ),
-      ),
+          create: (context) => GetRoomBloc(repository),
+          child: //EnterCodeScreen(
+              //iduser: iduser,
+              //),
+              RoomQuesScreen(iduser: iduser)),
     );
   }
 }

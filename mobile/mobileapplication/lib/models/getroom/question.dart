@@ -16,7 +16,7 @@ class Question {
       : _id = json['_id'] ?? "",
         idques = json['idques'],
         index = json['index'],
-        valueques = json['valueques'],
+        valueques = json['valuesques'],
         ans = (json['ans'] as List).map((e) => Ans.fromJson(e)).toList(),
         correct = json['correct'],
         time = json['time'];

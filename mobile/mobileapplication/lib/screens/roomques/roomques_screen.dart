@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobileapplication/screens/roomques/blocs/getroom/getroom_bloc.dart';
 import 'package:mobileapplication/screens/roomques/blocs/getroom/getroom_event.dart';
 import 'package:mobileapplication/screens/roomques/blocs/getroom/getroom_state.dart';
+import 'package:mobileapplication/screens/roomques/components/roomques_body.dart';
 
 class RoomQuesScreen extends StatefulWidget {
   final String iduser;
@@ -19,10 +20,11 @@ class RoomQuesScreen extends StatefulWidget {
 }
 
 class _RoomQuesScreenState extends State<RoomQuesScreen> {
-  
   @override
   void initState() {
     super.initState();
+    BlocProvider.of<GetRoomBloc>(context)
+        .add(GetRoomEventRequested('id123456'));
   }
 
   @override
@@ -42,9 +44,7 @@ class _RoomQuesScreenState extends State<RoomQuesScreen> {
             if (state is GetRoomStateSuccess) {
               final roomReponse = state.room_response;
               final room = roomReponse.doc;
-              return Center(
-                child: Text(room.idroom),
-              );
+              return RoomQuesBody(iduser: widget.iduser, room: room);
             }
             if (state is GetRoomStateFail) {
               return Text('Something went wrong');

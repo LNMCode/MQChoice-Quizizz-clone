@@ -8,7 +8,7 @@ import 'package:mobileapplication/models/getroom/room_response.dart';
 import 'package:mobileapplication/responsitory/stream_socket.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-const baseUrl = 'http://192.168.1.82:3000';
+const baseUrl = 'http://172.16.0.125:3000';
 
 class Repository {
   final Dio _dio = Dio();
@@ -84,5 +84,30 @@ class SocketRepository {
     print(socket.connected);
   }
 
-  connectAnswerQustion() {}
+  connectAnswerQuestion(
+    String idroom,
+    String iduser,
+  ) {
+    socket.emit('playerJoinToRoomPlay', {
+      'idroom': idroom,
+      'iduser': iduser,
+    });
+  }
+
+  // Player answer
+  answerQuestion(
+    String idroom,
+    String iduser,
+    String idques,
+    String idans,
+    String valueans,
+  ) {
+    socket.emit('sendToServer', {
+      'idroom': idroom,
+      'iduser': iduser,
+      'idques': idques,
+      'idans': idans,
+      'value': valueans,
+    });
+  }
 }

@@ -14,7 +14,8 @@ class WaitRoomBloc extends Bloc<WaitRoomEvent, WaitRoomState> {
   Stream<WaitRoomState> mapEventToState(WaitRoomEvent event) async* {
     if (event is WaitRoomEventConnected) {
       try {
-        socketRepository.connectWaitRoom(event.idroom, event.iduser, event.nameuser);
+        await socketRepository.connectWaitRoom(
+            event.idroom, event.iduser, event.nameuser);
         yield WaitRoomSuccess(streamSocket);
       } catch (e) {
         yield WaitRoomStateFail();
