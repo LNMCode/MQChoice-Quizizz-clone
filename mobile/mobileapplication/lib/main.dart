@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,7 @@ void main() {
           create: (context) => GetRoomBloc(repository),
         ),
         BlocProvider<WaitRoomBloc>(
-          create: (context) => WaitRoomBloc(streamSocket, socket),
+          create: (context) => WaitRoomBloc(streamSocket, socket, repository),
         ),
         BlocProvider<QuestionBloc>(
           create: (context) =>
@@ -67,10 +68,10 @@ class MyApp extends StatelessWidget {
       title: 'Material app',
       home: BlocProvider(
           create: (context) => GetRoomBloc(repository),
-          child: //EnterCodeScreen(
-              //iduser: iduser,
-              //),
-              RoomQuesScreen(iduser: iduser)),
+          child: EnterCodeScreen(
+            iduser: iduser,
+          )),
+      //RoomQuesScreen(iduser: iduser)),
     );
   }
 }

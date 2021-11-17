@@ -40,6 +40,8 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
       } catch (e) {
         yield QuestionAnswerFail();
       }
+    } else if (event is QuestionEventNextQuestion) {
+      yield QuestionAnswerNextQuestion();
     }
   }
 }

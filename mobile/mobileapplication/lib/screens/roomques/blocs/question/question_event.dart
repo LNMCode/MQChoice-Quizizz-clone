@@ -33,3 +33,5 @@ class QuestionWasAnswer extends QuestionEvent {
     this.valueans,
   );
 }
+
+class QuestionEventNextQuestion extends QuestionEvent{}

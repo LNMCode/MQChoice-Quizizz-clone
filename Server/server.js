@@ -82,18 +82,18 @@ io.on('connection', (socket) => {
     });
 
     // Player change from room wait to room play
-    /**socket.on('playerJoinToRoomPlay', (data) => {
+    socket.on('playerJoinToRoomPlay', (data) => {
         var idroom = data.idroom;
         var iduser = data.iduser;
 
         socket.join(idroom + 'playroom');
-    });**/
+    });
 
     // Host observe answer of players
     socket.on('hostObserveRoomPlay', (data) => {
         var idroom = data.idroom;
-        var iduser = data.iduser;
 
+        console.log('Host flow room ' + idroom);
         socket.join(idroom + 'playroom');
     });
 

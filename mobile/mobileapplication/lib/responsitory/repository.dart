@@ -5,16 +5,19 @@ import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 import 'package:mobileapplication/models/checkidroom/entercode_response.dart';
 import 'package:mobileapplication/models/getroom/room_response.dart';
+import 'package:mobileapplication/models/insert_user_response.dart';
 import 'package:mobileapplication/responsitory/stream_socket.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-const baseUrl = 'http://172.16.0.125:3000';
+const baseUrl = 'http://172.16.2.70:3000';
 
 class Repository {
   final Dio _dio = Dio();
   final http.Client httpClient;
   final getroom = (idroom) => '$baseUrl/joinroom/getroom?idroom=$idroom';
   final checkidroom = (idroom) => '$baseUrl/joinroom?idroom=$idroom';
+  final insertUserToRoomUrl = (idroom, iduser, nameuser) =>
+      '$baseUrl/joinroom/addusertoroom?idroom=$idroom&iduser=$iduser&nameuser=$nameuser';
 
   Repository(@required this.httpClient) : assert(httpClient != null);
 
@@ -39,6 +42,21 @@ class Repository {
       if (response.statusCode == 200) {
         var jsondecode = jsonDecode(response.body);
         return EnterCodeResponse.fromJson(jsondecode);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<InsertUserResponse?> insertUserToRoom(
+      String idroom, String iduser, String nameuser) async {
+    try {
+      final url = (insertUserToRoomUrl(idroom, iduser, nameuser));
+      print(url);
+      var response = await httpClient.put(url);
+      if (response.statusCode == 200) {
+        var jsondecode = jsonDecode(response.body);
+        return InsertUserResponse.fromJson(jsondecode);
       }
     } catch (e) {
       print(e);

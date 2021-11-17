@@ -26,6 +26,7 @@ class GetRoomBloc extends Bloc<GetRoomEvent, GetRoomState> {
           yield GetRoomStateFail();
         }
       } catch (e) {
+        print(e);
         yield GetRoomStateFail();
       }
     }

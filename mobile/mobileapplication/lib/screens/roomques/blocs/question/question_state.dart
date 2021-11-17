@@ -20,3 +20,6 @@ class QuestionAnswerLoading extends QuestionState {}
 class QuestionAnswerSuccess extends QuestionState {}
 
 class QuestionAnswerFail extends QuestionState {}
+
+// Next question
+class QuestionAnswerNextQuestion extends QuestionState{}

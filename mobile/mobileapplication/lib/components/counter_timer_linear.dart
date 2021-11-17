@@ -3,17 +3,22 @@ import 'package:flutter/widgets.dart';
 import 'package:mobileapplication/components/constants.dart';
 
 class CounterTimerLinear extends StatefulWidget {
-  final Size size;
+  final double width;
   final int time;
   final int timedelay;
+  final bool isStop;
+  final color;
+
   final Function() onFinish;
 
   const CounterTimerLinear({
     Key? key,
-    required this.size,
+    required this.width,
     this.time = 5,
     this.timedelay = 1,
+    required this.isStop,
     required this.onFinish,
+    this.color = kPrimaryColor,
   }) : super(key: key);
 
   @override
@@ -36,6 +41,10 @@ class _CounterTimeLineaer extends State<CounterTimerLinear>
             widget.onFinish();
             controller.stop();
           }
+
+          if (widget.isStop) {
+            controller.stop();
+          }
         });
       });
 
@@ -45,12 +54,11 @@ class _CounterTimeLineaer extends State<CounterTimerLinear>
 
   @override
   Widget build(BuildContext context) {
-    Size size = widget.size;
     return Container(
-      width: size.width,
+      width: widget.width,
       child: LinearProgressIndicator(
         value: controller.value,
-        color: kPrimaryColor,
+        color: widget.color,
         semanticsLabel: 'Linear progress indicator',
       ),
     );

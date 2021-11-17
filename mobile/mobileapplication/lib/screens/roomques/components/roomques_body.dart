@@ -24,9 +24,18 @@ class RoomQuesBody extends StatefulWidget {
 }
 
 class _RoomQuesBody extends State<RoomQuesBody> {
+  late bool _isButtonDisabled;
+  late int _positionCurrentPage;
+  late int _numberOfQuestion;
+  bool _isStopCountTimer = false;
+
   @override
   void initState() {
     super.initState();
+    _isButtonDisabled = false;
+    _positionCurrentPage = 1;
+    _numberOfQuestion = widget.room.data.length;
+
     BlocProvider.of<QuestionBloc>(context).add(QuestionConnectSocket(
       widget.room.idroom,
       widget.iduser,
@@ -44,21 +53,51 @@ class _RoomQuesBody extends State<RoomQuesBody> {
       body: BlocConsumer<QuestionBloc, QuestionState>(
         listener: (context, state) {
           if (state is QuestionAnswerSuccess) {
+            // Add animation for check answer in room
+            setState(() {
+              _isButtonDisabled = false;
+              _positionCurrentPage++;
+            });
+
+            print("${_positionCurrentPage} / ${_numberOfQuestion}");
+          }
+          if (state is QuestionAnswerNextQuestion) {
+            setState(() {
+              _isStopCountTimer = false;
+            });
+            if (_positionCurrentPage > _numberOfQuestion) {
+              print('Change to waitroom finish screen');
+            }
             pageController.nextPage(
                 duration: Duration(seconds: timeDurationChangePage),
                 curve: Curves.easeInOutQuart);
           }
         },
         builder: (context, state) {
-          if (widget.room != null && state is QuestionAnswerConnectSuccess) {
+          if (widget.room != null) {
             return PageView(
               physics: NeverScrollableScrollPhysics(),
               controller: pageController,
               scrollDirection: Axis.horizontal,
               children: _getListQuestion(
                 size: size,
-                onSubmitted: (idasn, valueans, idques) {
-                  _submittedAnswer(context, idques, idasn, valueans);
+                onSubmitted: (idasn, valueans, idques, isCorrect) {
+                  setState(() {
+                    _isButtonDisabled = true;
+                    _isStopCountTimer = true;
+                  });
+                  _submittedAnswer(
+                    context: context,
+                    idques: idques,
+                    idasn: idasn,
+                    valueans: valueans,
+                    isCorrect: isCorrect,
+                    onNext: () {
+                      Navigator.pop(context);
+                      BlocProvider.of<QuestionBloc>(context)
+                          .add(QuestionEventNextQuestion());
+                    },
+                  );
                 },
               ),
             );
@@ -75,7 +114,7 @@ class _RoomQuesBody extends State<RoomQuesBody> {
 
   List<Widget> _getListQuestion({
     required Size size,
-    required Function(String, String, String) onSubmitted,
+    required Function(String, String, String, bool) onSubmitted,
   }) {
     List<Widget> childs = [];
     for (final ques in widget.room.data) {
@@ -84,13 +123,15 @@ class _RoomQuesBody extends State<RoomQuesBody> {
         child: Column(
           children: [
             CounterTimerLinear(
-              size: size,
+              width: size.width,
               time: int.parse(ques.time),
+              isStop: _isStopCountTimer,
               onFinish: () {
                 onSubmitted(
                   'null',
                   'null',
                   ques.idques,
+                  false,
                 );
               },
             ),
@@ -117,6 +158,7 @@ class _RoomQuesBody extends State<RoomQuesBody> {
                     idans,
                     valueans,
                     ques.idques,
+                    ques.correct == idans,
                   );
                 },
               ),
@@ -141,21 +183,30 @@ class _RoomQuesBody extends State<RoomQuesBody> {
           textColor: Colors.white,
           text: ans.valueans,
           margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-          press: () {
-            onPress(ans.idans, ans.valueans);
-          },
+          press: _isButtonDisabled
+              ? null
+              : () {
+                  onPress(ans.idans, ans.valueans);
+                },
         ),
       );
     }
     return childs;
   }
 
-  _submittedAnswer(
-    BuildContext context,
-    String idques,
-    String idasn,
-    String valueans,
-  ) {
+  _submittedAnswer({
+    required BuildContext context,
+    required String idques,
+    required String idasn,
+    required String valueans,
+    required bool isCorrect,
+    required Function() onNext,
+  }) {
+    _showModalBottomSheet(
+      context,
+      isCorrect,
+      onNext,
+    );
     BlocProvider.of<QuestionBloc>(context).add(
       QuestionWasAnswer(
         widget.room.idroom,
@@ -164,6 +215,50 @@ class _RoomQuesBody extends State<RoomQuesBody> {
         idasn,
         valueans,
       ),
+    );
+  }
+
+  _showModalBottomSheet(
+    BuildContext context,
+    bool isCorrect,
+    Function() onNext,
+  ) {
+    showModalBottomSheet(
+      context: context,
+      enableDrag: false,
+      isDismissible: false,
+      builder: (context) {
+        Size size = MediaQuery.of(context).size;
+        return Container(
+          height: size.height * 0.15,
+          decoration: BoxDecoration(
+            color: isCorrect ? correctColor : inCorrectColor,
+          ),
+          child: Column(
+            children: [
+              CounterTimerLinear(
+                isStop: false,
+                width: size.width,
+                time: 5,
+                color: Colors.yellowAccent,
+                onFinish: onNext,
+              ),
+              Container(
+                padding: EdgeInsets.only(top: 25),
+                child: Text(
+                  isCorrect ? 'Correct' : 'Incorrect',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
