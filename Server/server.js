@@ -106,6 +106,19 @@ io.on('connection', (socket) => {
         socket.to(idroom + 'playroom').emit('playerAnswered' + idroom, data);
     });
 
+    // Wait finish room from client
+    socket.on('waitFinishRoom', (data) => {
+        var idroom = data.idroom;
+        console.log('Have user finish exam');
+        socket.join('waitFinishRoom' + idroom);
+    })
+
+
+    socket.on('finishRoomFromHost', (data) => {
+        var idroom = data.idroom
+        socket.to('waitFinishRoom' + idroom).emit('finishRoomToClient' + idroom, idroom);
+    })
+
     //Disconnect socket
     socket.on('disconnect', (socket) => {
         console.log('Disconnection');

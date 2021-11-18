@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:mobileapplication/models/getroom/room_response.dart';
 import 'package:mobileapplication/responsitory/stream_socket.dart';
 
 class WaitRoomFinishState extends Equatable {
@@ -14,5 +15,6 @@ class WaitRoomFinishStateFail extends WaitRoomFinishState {}
 
 class WaitRoomFinishStateSuccess extends WaitRoomFinishState {
   final StreamSocket socket;
-  const WaitRoomFinishStateSuccess(this.socket);
+  final RoomResponse roomResponse;
+  const WaitRoomFinishStateSuccess(this.socket, this.roomResponse);
 }

@@ -17,6 +17,5 @@ class WaitRoomFinishEventConnected extends WaitRoomFinishEvent {
   });
 
   @override
-  // TODO: implement props
   List<Object?> get props => [idroom, iduser];
 }

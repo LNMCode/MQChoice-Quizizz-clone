@@ -9,7 +9,7 @@ import 'package:mobileapplication/models/insert_user_response.dart';
 import 'package:mobileapplication/responsitory/stream_socket.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-const baseUrl = 'http://172.16.2.70:3000';
+const baseUrl = 'http://192.168.1.82:3000';
 
 class Repository {
   final Dio _dio = Dio();
@@ -127,5 +127,22 @@ class SocketRepository {
       'idans': idans,
       'value': valueans,
     });
+  }
+
+  connectWaitFinishRoom(
+    String idroom,
+    String iduser,
+  ) {
+    socket.emit('waitFinishRoom', {
+      'idroom': idroom,
+      'iduser': iduser,
+    });
+
+    socket.on(
+        'finishRoomToClient' + idroom,
+        (data) => {
+              print('finish room ' + data),
+              streamSocket.addResponse(data),
+            });
   }
 }

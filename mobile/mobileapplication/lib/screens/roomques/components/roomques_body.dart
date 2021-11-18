@@ -9,6 +9,7 @@ import 'package:mobileapplication/models/getroom/room.dart';
 import 'package:mobileapplication/screens/roomques/blocs/question/question_bloc.dart';
 import 'package:mobileapplication/screens/roomques/blocs/question/question_event.dart';
 import 'package:mobileapplication/screens/roomques/blocs/question/question_state.dart';
+import 'package:mobileapplication/screens/waitroom_finish/waitroom_finish_screen.dart';
 
 class RoomQuesBody extends StatefulWidget {
   final Room room;
@@ -67,6 +68,15 @@ class _RoomQuesBody extends State<RoomQuesBody> {
             });
             if (_positionCurrentPage > _numberOfQuestion) {
               print('Change to waitroom finish screen');
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) {
+                  return WaitRoomFinishScreen(
+                    idroom: widget.room.idroom,
+                    iduser: widget.iduser,
+                  );
+                }),
+              );
             }
             pageController.nextPage(
                 duration: Duration(seconds: timeDurationChangePage),

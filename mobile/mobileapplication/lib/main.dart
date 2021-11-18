@@ -16,6 +16,8 @@ import 'package:mobileapplication/screens/roomques/blocs/getroom/getroom_bloc_ob
 
 import 'package:mobileapplication/responsitory/repository.dart';
 import 'package:mobileapplication/screens/waitroom/blocs/waitroom_bloc.dart';
+import 'package:mobileapplication/screens/waitroom_finish/blocs/waitroom_finish_bloc.dart';
+import 'package:mobileapplication/screens/waitroom_finish/waitroom_finish_screen.dart';
 
 void main() {
   Bloc.observer = GetRoomBlocObserver();
@@ -41,7 +43,11 @@ void main() {
         BlocProvider<QuestionBloc>(
           create: (context) =>
               QuestionBloc(repository: repository, socketRepository: socket),
-        )
+        ),
+        BlocProvider<WaitRoomFinishBloc>(
+          create: (context) =>
+              WaitRoomFinishBloc(streamSocket, socket, repository),
+        ),
       ],
       child: MyApp(
         repository: repository,
@@ -68,8 +74,9 @@ class MyApp extends StatelessWidget {
       title: 'Material app',
       home: BlocProvider(
           create: (context) => GetRoomBloc(repository),
-          child: EnterCodeScreen(
-            iduser: iduser,
+          child: WaitRoomFinishScreen(
+            idroom: 'id123456',
+            iduser: '1637128024082691',
           )),
       //RoomQuesScreen(iduser: iduser)),
     );
