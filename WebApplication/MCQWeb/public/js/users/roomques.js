@@ -14,7 +14,7 @@ var socket = io.connect('http://127.0.0.1:3000', { query: 'idroom=' + idroom + '
 
 var mytimeout;
 
-function onClickAns(idroom, iduser, idques, idans, value, listAns) {
+function onClickAns(iscorrect, idroom, iduser, idques, idans, value, listAns) {
     //console.log(listAns);
     for (let ans of JSON.parse(listAns)) {
         if (idques + ans.idans == idques + idans) {
@@ -22,13 +22,14 @@ function onClickAns(idroom, iduser, idques, idans, value, listAns) {
         }
         document.getElementById(idques + ans.idans).disabled = true;
     }
-
+    var istrue = iscorrect == idans;
     socket.emit('sendToServer', {
         'idroom': idroom,
         'iduser': iduser,
         'idques': idques,
         'idans': idans,
         'value': value,
+        'istrue': istrue,
     })
 
     if (mytimeout != undefined) clearTimeout(mytimeout);
@@ -52,6 +53,7 @@ function startTimeBar(timeout, numPageCurrent, numPageTotal, idroom, iduser, idq
                 'idques': idques,
                 'idans': 'null',
                 'value': 'null',
+                'istrue': false,
             })
             nextPage(numPageCurrent);
         }, parseInt(timeout) * 1000);

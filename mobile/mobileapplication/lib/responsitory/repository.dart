@@ -65,7 +65,7 @@ class Repository {
 }
 
 class SocketRepository {
-  final StreamSocket streamSocket;
+  StreamSocket streamSocket;
 
   SocketRepository({
     required this.streamSocket,
@@ -75,6 +75,11 @@ class SocketRepository {
     "transports": ["websocket"],
     "autoConnect": false,
   });
+
+  setStreamSocket(StreamSocket streamSocket) {
+    this.streamSocket.dispose();
+    this.streamSocket = streamSocket;
+  }
 
   // Connect to server and wait host room start
   // idroom: id room that user enterd before
@@ -119,6 +124,7 @@ class SocketRepository {
     String idques,
     String idans,
     String valueans,
+    bool istrue,
   ) {
     socket.emit('sendToServer', {
       'idroom': idroom,
@@ -126,6 +132,7 @@ class SocketRepository {
       'idques': idques,
       'idans': idans,
       'value': valueans,
+      'istrue': istrue,
     });
   }
 

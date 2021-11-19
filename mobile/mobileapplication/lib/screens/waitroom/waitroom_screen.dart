@@ -65,6 +65,7 @@ class _WaitRoomScreenState extends State<WaitRoomScreen> {
                 if (snapshot.hasData && snapshot.data == widget.idroom) {
                   // Navigate to roomques and start
                   Future.delayed(Duration.zero, () async {
+                    _streamSocket!.dispose();
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (context) {

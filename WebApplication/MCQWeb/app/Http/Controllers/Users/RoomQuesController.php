@@ -19,23 +19,27 @@ class RoomQuesController extends Controller
             $iduser = $cookie['iduser'];
 
             $rooms = $response['doc'];
-            $playerById = current(array_filter($rooms['players'], function($e) use($iduser) {
-                return $e['id'] == $iduser;
-            }));
+            // $playerById = current(array_filter($rooms['players'], function($e) use($iduser) {
+            //     return $e['id'] == $iduser;
+            // }));
 
-            $listQuesAnswered = $playerById['play'];
-            $listIdsQuesAnswered = array();
-            foreach ($listQuesAnswered as $ans){
-                array_push($listIdsQuesAnswered, $ans['idques']);
-            }
+            // $listQuesAnswered = $playerById['play'];
+            // $listIdsQuesAnswered = array();
+            // if (sizeOf($listIdsQuesAnswered) > 0){
+            //     foreach ($listQuesAnswered as $ans){
+            //         array_push($listIdsQuesAnswered, $ans['idques']);
+            //     }
+            // } 
 
-            $listQues = sizeof($listIdsQuesAnswered) > 0 ? array_filter($rooms['data'], function($v) use ($listIdsQuesAnswered) {
-                return !in_array($v['idques'], $listIdsQuesAnswered);
-            }) : $rooms['data'];
+            // $listQues = sizeof($listIdsQuesAnswered) > 0 ? array_filter($rooms['data'], function($v) use ($listIdsQuesAnswered) {
+            //     return !in_array($v['idques'], $listIdsQuesAnswered);
+            // }) : $rooms['data'];
     
-            if (sizeof($rooms) != 0){
+            // if (sizeof($rooms) != 0){
     
-            }
+            // }
+
+            $listQues = $rooms['data'];
             return view('users.roomques', [
                 'title' => 'Room Started',
                 'idroom' => $idroom,

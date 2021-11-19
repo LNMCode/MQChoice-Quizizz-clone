@@ -16,11 +16,9 @@ router.post('/getroombyid', async(req, res) => {
             if (user == null) {
                 return res.json({ message: 'fail', doc: {} })
             }
-            console.log(user.rooms);
         });
         $idroom = req.query.idroom;
         await Room.findOne({ idroom: $idroom }).then((doc) => {
-            console.log(doc);
             if (doc == null) {
                 res.json({ message: 'fail', doc: {} });
             } else {
@@ -37,7 +35,6 @@ router.post('/openroom', async(req, res) => {
         console.log(req.query.idroom);
         $idroom = req.query.idroom;
         await Room.findOneAndUpdate({ idroom: $idroom }, { isopen: true }).then((doc) => {
-            console.log(doc);
             if (doc == null) {
                 res.json({ message: 'fail', doc: {} });
             } else {
@@ -54,7 +51,6 @@ router.post('/closeroom', async(req, res) => {
         console.log(req.query.idroom);
         $idroom = req.query.idroom;
         await Room.findOneAndUpdate({ idroom: $idroom }, { isopen: false }).then((doc) => {
-            console.log(doc);
             if (doc == null) {
                 res.json({ message: 'fail', doc: {} });
             } else {
@@ -71,7 +67,6 @@ router.post('/startroom', async(req, res) => {
         console.log(req.query.idroom);
         $idroom = req.query.idroom;
         await Room.findOneAndUpdate({ idroom: $idroom }, { isstart: true }).then((doc) => {
-            console.log(doc);
             if (doc == null) {
                 res.json({ message: 'fail', doc: {} });
             } else {
@@ -88,7 +83,6 @@ router.get('/getidsusersocket', async(req, res) => {
         console.log(req.query.idroom);
         $idroom = req.query.idroom;
         await Room.findOneAndUpdate({ idroom: $idroom }, { isstart: true }).then((doc) => {
-            console.log(doc);
             if (doc == null) {
                 res.json({ message: 'fail', doc: {} });
             } else {

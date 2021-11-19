@@ -28,7 +28,6 @@ router.get('/getroom', async(req, res) => {
         console.log(req.query.idroom);
         $idroom = req.query.idroom;
         await Room.findOne({ idroom: $idroom }).then((doc) => {
-            console.log(doc);
             if (doc == null) {
                 res.json({ message: 'fail', doc: {} });
             } else {

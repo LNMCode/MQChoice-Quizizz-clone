@@ -35,6 +35,7 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
           event.idques,
           event.idans,
           event.valueans,
+          event.istrue,
         );
         yield QuestionAnswerSuccess();
       } catch (e) {

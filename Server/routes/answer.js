@@ -12,22 +12,19 @@ router.post('/', async(req, res) => {
     var idques = req.body.idques;
     var idans = req.body.idans;
     var value = req.body.value;
+    var istrue = req.body.istrue;
     try {
-        let result = await Room.findOneAndUpdate(
-            {idroom: idroom},
-            {
-                $push: {'players.$[inner].play': {idques: idques, idans: idans}}
-            },
-            {
-                arrayFilters: [{"inner.id": iduser}],
-                new: true
-            }
-        );
+        let result = await Room.findOneAndUpdate({ idroom: idroom }, {
+            $push: { 'players.$[inner].play': { idques: idques, idans: idans, istrue: istrue } }
+        }, {
+            arrayFilters: [{ "inner.id": iduser }],
+            new: true
+        });
 
-        if (!result) return res.json({message: 'fail'});
-        res.json({message: 'ok'})
+        if (!result) return res.json({ message: 'fail' });
+        res.json({ message: 'ok' })
     } catch (error) {
-        res.json({message: err});
+        res.json({ message: err });
     }
 });
 

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobileapplication/components/constants.dart';
 import 'package:mobileapplication/models/getroom/room_response.dart';
 import 'package:mobileapplication/responsitory/stream_socket.dart';
+import 'package:mobileapplication/screens/summary/summary_screen.dart';
 import 'package:mobileapplication/screens/waitroom_finish/blocs/waitroom_finish_bloc.dart';
 import 'package:mobileapplication/screens/waitroom_finish/blocs/waitroom_finish_event.dart';
 import 'package:mobileapplication/screens/waitroom_finish/blocs/waitroom_finish_state.dart';
@@ -24,7 +25,7 @@ class WaitRoomFinishScreen extends StatefulWidget {
 }
 
 class _WaitRoomFinishScreen extends State<WaitRoomFinishScreen> {
-  StreamSocket? _streamSocket;
+  late StreamSocket _streamSocket;
   RoomResponse? _roomResponse;
 
   @override
@@ -44,7 +45,6 @@ class _WaitRoomFinishScreen extends State<WaitRoomFinishScreen> {
       body: BlocConsumer<WaitRoomFinishBloc, WaitRoomFinishState>(
         listener: (context, state) {
           if (state is WaitRoomFinishStateSuccess) {
-            _streamSocket = state.socket;
             _roomResponse = state.roomResponse;
           }
         },
@@ -52,18 +52,24 @@ class _WaitRoomFinishScreen extends State<WaitRoomFinishScreen> {
           if (state is WaitRoomFinishStateLoading) {
             return CircularProgressIndicator();
           }
-          if (_roomResponse != null && _streamSocket != null) {
+          if (_roomResponse != null && state is WaitRoomFinishStateSuccess) {
+            _streamSocket = state.socket;
             return StreamBuilder(
-              stream: _streamSocket!.getResponse,
+              stream: _streamSocket.getResponse,
               builder: (context, snapshot) {
                 if (snapshot.hasData && snapshot.data == widget.idroom) {
                   print('Change thoi du ma m');
-                  // Navigator.pushReplacement(
-                  //     context,
-                  //     MaterialPageRoute(builder: (context) {
-                  //       return RoomQuesScreen(iduser: widget.iduser);
-                  //     }),
-                  //   );
+                  Future.delayed(Duration.zero, () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) {
+                        return SummaryScreen(
+                          idroom: widget.idroom,
+                          iduser: widget.iduser,
+                        );
+                      }),
+                    );
+                  });
                 }
                 if (snapshot.hasError) {
                   return Text('Some thing error ' + snapshot.error.toString());

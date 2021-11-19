@@ -26,8 +26,8 @@ class WaitRoomFinishBody extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     Player? player = _getPlayerById(room.players, iduser);
     if (player != null) {
-      var correctNumber = _getCorrectNumber(room.data, player.play);
-      int incorrectNumer = room.data.length - correctNumber;
+      var correctNumber = _getCorrectNumber(player.play);
+      var incorrectNumer = room.data.length - correctNumber;
       return Container(
         width: size.width,
         decoration: BoxDecoration(color: Colors.black),
@@ -224,12 +224,13 @@ class WaitRoomFinishBody extends StatelessWidget {
     return null;
   }
 
-  int _getCorrectNumber(List<Question> questions, List<Play> plays) {
+  int _getCorrectNumber(List<Play> plays) {
     int correct = 0;
-    for (final ques in questions) {
-      var play = plays.singleWhere((element) => element.idques == ques.idques);
-      if (ques.correct == play.idans) {
-        correct++;
+    if (plays != null) {
+      for (final play in plays) {
+        if (play.istrue) {
+          correct++;
+        }
       }
     }
     return correct;

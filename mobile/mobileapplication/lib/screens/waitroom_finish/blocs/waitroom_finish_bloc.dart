@@ -5,18 +5,20 @@ import 'package:mobileapplication/responsitory/stream_socket.dart';
 import 'package:mobileapplication/screens/waitroom_finish/blocs/waitroom_finish_event.dart';
 import 'package:mobileapplication/screens/waitroom_finish/blocs/waitroom_finish_state.dart';
 
-class WaitRoomFinishBloc extends Bloc<WaitRoomFinishEvent, WaitRoomFinishState> {
-  final StreamSocket streamSocket;
+class WaitRoomFinishBloc
+    extends Bloc<WaitRoomFinishEvent, WaitRoomFinishState> {
+  StreamSocket streamSocket = StreamSocket();
   final SocketRepository socketRepository;
   final Repository repository;
 
-  WaitRoomFinishBloc(this.streamSocket, this.socketRepository, this.repository)
+  WaitRoomFinishBloc(this.socketRepository, this.repository)
       : super(const WaitRoomFinishState());
 
   @override
   Stream<WaitRoomFinishState> mapEventToState(
       WaitRoomFinishEvent event) async* {
     if (event is WaitRoomFinishEventConnected) {
+      socketRepository.setStreamSocket(streamSocket);
       try {
         final RoomResponse? roomResponse =
             await repository.getRoom(event.idroom);

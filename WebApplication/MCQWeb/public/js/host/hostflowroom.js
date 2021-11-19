@@ -22,10 +22,10 @@ function onCloseRoom(data) {
     var answer = window.confirm("The room is having some players! Are you sure close?");
     if (answer) {
         console.log('Close room and user be pushed out');
-        console.log('Ok t dong nha');
+        socket.emit('finishRoomFromHost', { idroom: data.value });
         closeRoom(data);
         window.onbeforeunload = false;
-        window.location.replace('http://localhost:8000/manageroom/id123456');
+        window.location.replace('http://localhost:8000/admin');
     } else {
         console.log('Huy dong');
     }

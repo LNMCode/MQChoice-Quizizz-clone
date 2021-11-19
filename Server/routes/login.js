@@ -3,22 +3,21 @@ const User = require('../models/Users');
 
 const router = express.Router();
 
-router.post('/', async (req, res) => {
+router.post('/', async(req, res) => {
     try {
         var username = req.query.username;
         var password = req.query.password;
 
         console.log('Login ' + username + ' - ' + password);
-        await User.findOne({username: username, password: password}).then((doc) => {
-            console.log(doc);
-            if(doc == null){
-                res.json({message: 'fail', doc: {}});
+        await User.findOne({ username: username, password: password }).then((doc) => {
+            if (doc == null) {
+                res.json({ message: 'fail', doc: {} });
             } else {
-                res.json({message: 'ok', doc: doc});
+                res.json({ message: 'ok', doc: doc });
             }
         })
     } catch (error) {
-        res.json({message: error});
+        res.json({ message: error });
     }
 });
 

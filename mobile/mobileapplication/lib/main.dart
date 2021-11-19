@@ -15,6 +15,8 @@ import 'package:mobileapplication/screens/roomques/blocs/getroom/getroom_bloc.da
 import 'package:mobileapplication/screens/roomques/blocs/getroom/getroom_bloc_observer.dart';
 
 import 'package:mobileapplication/responsitory/repository.dart';
+import 'package:mobileapplication/screens/summary/blocs/summary_bloc.dart';
+import 'package:mobileapplication/screens/summary/summary_screen.dart';
 import 'package:mobileapplication/screens/waitroom/blocs/waitroom_bloc.dart';
 import 'package:mobileapplication/screens/waitroom_finish/blocs/waitroom_finish_bloc.dart';
 import 'package:mobileapplication/screens/waitroom_finish/waitroom_finish_screen.dart';
@@ -45,8 +47,10 @@ void main() {
               QuestionBloc(repository: repository, socketRepository: socket),
         ),
         BlocProvider<WaitRoomFinishBloc>(
-          create: (context) =>
-              WaitRoomFinishBloc(streamSocket, socket, repository),
+          create: (context) => WaitRoomFinishBloc(socket, repository),
+        ),
+        BlocProvider<SummaryBloc>(
+          create: (context) => SummaryBloc(repository),
         ),
       ],
       child: MyApp(
@@ -74,11 +78,7 @@ class MyApp extends StatelessWidget {
       title: 'Material app',
       home: BlocProvider(
           create: (context) => GetRoomBloc(repository),
-          child: WaitRoomFinishScreen(
-            idroom: 'id123456',
-            iduser: '1637128024082691',
-          )),
-      //RoomQuesScreen(iduser: iduser)),
+          child: EnterCodeScreen(iduser: iduser)),
     );
   }
 }

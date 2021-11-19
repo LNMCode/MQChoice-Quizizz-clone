@@ -51,6 +51,9 @@ const RoomSchema = mongoose.Schema({
             },
             idans: {
                 type: String
+            },
+            istrue: {
+                type: Boolean,
             }
         }]
     }],

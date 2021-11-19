@@ -24,6 +24,7 @@ class QuestionWasAnswer extends QuestionEvent {
   final String idques;
   final String idans;
   final String valueans;
+  final bool istrue;
 
   const QuestionWasAnswer(
     this.idroom,
@@ -31,7 +32,8 @@ class QuestionWasAnswer extends QuestionEvent {
     this.idques,
     this.idans,
     this.valueans,
+    this.istrue,
   );
 }
 
-class QuestionEventNextQuestion extends QuestionEvent{}
+class QuestionEventNextQuestion extends QuestionEvent {}
