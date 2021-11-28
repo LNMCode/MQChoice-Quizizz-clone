@@ -13,11 +13,9 @@ import 'package:flutter/services.dart';
 import 'package:mobileapplication/screens/waitroom/waitroom_screen.dart';
 
 class EnterCodeScreen extends StatefulWidget {
-  final String iduser;
 
   const EnterCodeScreen({
     Key? key,
-    required this.iduser,
   }) : super(key: key);
 
   @override
@@ -27,6 +25,7 @@ class EnterCodeScreen extends StatefulWidget {
 class _EnterCodeScreenState extends State<EnterCodeScreen> {
   var _textEnterCode;
   var _textNameUser;
+  final String iduser = DateTime.now().microsecondsSinceEpoch.toString();
 
   @override
   void initState() {
@@ -63,7 +62,7 @@ class _EnterCodeScreenState extends State<EnterCodeScreen> {
                 context,
                 MaterialPageRoute(builder: (context) {
                   return WaitRoomScreen(
-                    iduser: widget.iduser,
+                    iduser: iduser,
                     idroom: _textEnterCode,
                     nameuser: _textNameUser,
                   );

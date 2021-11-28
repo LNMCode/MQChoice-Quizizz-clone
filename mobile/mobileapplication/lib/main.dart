@@ -26,7 +26,6 @@ void main() {
   final Repository repository = Repository(http.Client());
   final StreamSocket streamSocket = StreamSocket();
   final SocketRepository socket = SocketRepository(streamSocket: streamSocket);
-  final String iduser = DateTime.now().microsecondsSinceEpoch.toString();
 
   runApp(
     MultiBlocProvider(
@@ -55,7 +54,6 @@ void main() {
       ],
       child: MyApp(
         repository: repository,
-        iduser: iduser,
       ),
     ),
   );
@@ -63,22 +61,20 @@ void main() {
 
 class MyApp extends StatelessWidget {
   final Repository repository;
-  final String iduser;
 
   const MyApp({
     Key? key,
     required this.repository,
-    required this.iduser,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    print('Main' + iduser);
+    print('Main');
     return MaterialApp(
       title: 'Material app',
       home: BlocProvider(
           create: (context) => GetRoomBloc(repository),
-          child: EnterCodeScreen(iduser: iduser)),
+          child: const EnterCodeScreen()),
     );
   }
 }

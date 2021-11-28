@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:200,300,400,500,600,700,800,900&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    overflow-x: hidden;
+    background: url('../../image/background-2.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+:root {
+    --black: #333;
+    --yellow: #ffa200;
+    --yellow2: #ffbf75;
+    --white: #fff;
+    --white2: #fff;
+    --black2: #333;
+}
+
+section {
+    position: relative;
+    width: 100%;
+    padding: 0 100px 100px 100px;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+}
+
+.container {
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 600px;
+    margin: 15px auto;
+    border-radius: 10px;
+    padding: 15px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+
+.container-players-accesss {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.container-players-accesss div {
+    width: 500px;
+    height: 96px;
+    border-radius: 24px;
+    padding: 15px 30px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+    margin: 16px;
+    position: relative;
+    color: white;
+}
+
+.container-players-accesss div img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+}
+
+.cor {
+    text-align: center;
+    background-color: saddlebrown;
+    padding: 10px;
+    margin: 0px 50px;
+    border-radius: 15px;
+}
+
+.rounded-ans-dot {
+    position: relative;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 9999px;
+    --tw-bg-opacity: 1;
+}
+
+.answer {
+    display: flex;
+    align-items: center;
+    margin: 5px 0px;
+}
+
+.rounded-ans-green {
+    background-color: #63C370;
+    flex-shrink: 0;
+}
+
+.rounded-ans-red {
+    --tw-bg-opacity: 1;
+    background-color: #EB3745;
+}
+
+.rounded-ans-gray {
+    --tw-bg-opacity: 1;
+    background-color: #AAAAAA;
+}
+
+.rounded-ans-text {
+    margin: 0;
+    margin-left: 15px;
+}
+
+.question {
+    padding: 15px 20px;
+    background: white;
+    border-radius: 15px;
+    margin: 15px 0px;
+    color: black;
+}

@@ -23,10 +23,13 @@ class AdminController extends Controller
                     $user = $response['doc'];
                     if($username == $user['username'] && $password == $user['password']){
                         $rooms = $this->getListRoomById($user['rooms'], $url_current, $user['id']);
+                        $allroom = $this->getallroom($url_current);
+
                         return view('admin', [
                             'title' => 'Admin page',
                             'data' => $user,
                             'rooms' => $rooms,
+                            'allroom' => $allroom,
                             'type' => gettype($rooms),
                             'url' => $url_current.'/room'
                         ]);
@@ -49,5 +52,19 @@ class AdminController extends Controller
             }
         }
         return $rooms;
+    }
+
+    public function public(Request $request){
+        $ispublic = $request->input('public');
+        $url_current = 'http://127.0.0.1:3000';
+        if(!empty($ispublic)){
+            $response = Http::post($url_current.'/room/public?public='.$ispublic);
+            
+        }
+    }
+
+    private function getallroom($url_current){
+        $response = Http::get($url_current.'/room/getallroom');
+        return $response['doc'];
     }
 }

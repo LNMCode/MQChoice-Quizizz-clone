@@ -29,7 +29,11 @@
                     <div class="form-group">
                         <label for="desriptionofroom">Description</label>
                         <textarea type="text" class="form-control mb-2" id="desriptionofroom" placeholder="{{isset($room) ? $room['desription'] : 'Enter description room'}}" rows="3" name="desriptionroom" required>{{isset($room) ? $room['desription'] : ''}}</textarea>
-                    </div>                    
+                    </div>     
+                    <div class="form-group">
+                        <label for="imageurl">Image</label>
+                        <input type="text" class="form-control mb-2" id="imageurl" placeholder="Enter link image" name="imageurl" value="{{isset($room) ? $room['imageUrl'] : ''}}" required>
+                    </div>               
                     @if (isset($room))
                         <input type="text" class="invisible d-none" value="{{$room['idroom']}}" name="idroom">
                     @endif
@@ -98,6 +102,11 @@
                                                 </div>
                                             @endforeach
                                         </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="timequestion">Enter time for question</label>
+                                            <input type="number" class="form-control" id="timequestion" placeholder="Enter question" name="timequestion" value="{{$ques['time']}}"required>
+                                        </div>
                                         @if (isset($room))
                                             <input type="text" class="invisible d-none" value="{{$room['idroom']}}" name="idroom">
                                             <input type="text" class="invisible d-none" value="{{$ques['idques']}}" name="idques">
@@ -138,6 +147,10 @@
                                 </div>
                             </div>
                         @endfor
+                    </div>
+                    <div class="form-group">
+                        <label for="timequestion">Enter time for question</label>
+                        <input type="number" class="form-control" id="timequestion" placeholder="Enter question" name="timequestion" required>
                     </div>
                     @if (isset($room))
                         <input type="text" class="invisible d-none" value="{{$room['idroom']}}" name="idroom">

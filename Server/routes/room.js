@@ -6,6 +6,21 @@ const { route } = require('./joinroom');
 
 const router = express.Router();
 
+router.get('/getallroom', async(req, res) => {
+    try {
+        await Room.find({}).then((doc) => {
+            if (doc == null) {
+                res.json({ message: 'fail', doc: {} });
+            } else {
+                res.json({ message: 'ok', doc: doc });
+            }
+        })
+    } catch (error) {
+        res.json({ message: error });
+
+    }
+});
+
 router.post('/getroombyid', async(req, res) => {
     try {
         console.log(req.query.idroom);
@@ -103,13 +118,14 @@ router.get('/addquestion', async(req, res) => {
         var valueans2 = req.query.valueans2;
         var valueans3 = req.query.valueans3;
         var valueans4 = req.query.valueans4;
+        var timequestion = req.query.timequestion;
         var correct = req.query.answer;
         var index = req.query.index;
         const insertquestion = {
             idques: 'idq' + Date.now(),
             valuesques: titleques,
             correct: correct,
-            time: "30",
+            time: timequestion == undefined ? "30" : timequestion,
             index: index,
             ans: [{
                     idans: 'ans1',
@@ -154,10 +170,13 @@ router.get('/updatequestion', async(req, res) => {
         var answer = req.query.answer;
         var idroom = req.query.idroom;
         var idques = req.query.idques;
+        var timequestion = req.query.timequestion;
+
         await Room.findOneAndUpdate({ idroom: idroom }, {
             $set: {
                 'data.$[inner].valuesques': titlequestion,
                 'data.$[inner].correct': answer,
+                'data.$[inner].time': timequestion,
                 'data.$[inner].ans': [{
                         idans: 'ans1',
                         valueans: ans1,
@@ -226,10 +245,11 @@ router.get('/updateroom', async(req, res) => {
         var idroom = req.query.idroom;
         var title = req.query.nameroom;
         var description = req.query.desriptionroom;
-
+        var image = req.query.imageurl;
         await Room.findOneAndUpdate({ idroom: idroom }, {
             title: title,
-            desription: description
+            desription: description,
+            imageUrl: image
         })
         res.writeHead(302, {
             'Location': 'http://localhost:8000/manageroom/' + idroom
@@ -274,6 +294,22 @@ router.get('/createnewroom', async(req, res) => {
         res.end();
     } catch (error) {
         console.log({ message: err });
+    }
+})
+
+router.post('/public', async(req, res) => {
+    try {
+        var public = req.query.public;
+        var idroom = req.query.idroom;
+        await Room.findOneAndUpdate({ idroom: idroom }, { ispublic: public }).then((doc) => {
+            if (doc == null) {
+                res.json({ message: 'fail', doc: {} });
+            } else {
+                res.json({ message: 'ok', doc: doc });
+            }
+        });
+    } catch (error) {
+        res.json({ message: error });
     }
 })
 

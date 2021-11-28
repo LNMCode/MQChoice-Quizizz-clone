@@ -26,7 +26,7 @@
     @section('content')
         <div class="content">
             <div class="textBox">
-                <h2>It's not just Dragon<br>It's <span>Phi Long</span></h2>
+                <h2>It's not just Question<br>It's <span>Feature</span></h2>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, accusantium obcaecati repellendus porro ipsa unde. Atque blanditiis ipsum ea neque excepturi corporis.</p>
                 <a href="#" class="a-black">Learn more</a><br>
                 <a href="#">Get started ></a>

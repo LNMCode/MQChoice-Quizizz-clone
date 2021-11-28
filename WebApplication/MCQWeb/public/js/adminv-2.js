@@ -19,3 +19,26 @@ function onShowContainer() {
 function deleteRoom(idroom) {
     console.log(idroom);
 }
+
+var checkboxes = document.querySelectorAll("input[type=checkbox]");
+
+checkboxes.forEach(function(checkbox) {
+    checkbox.addEventListener('change', function() {
+        var idroom = this.value;
+        if (this.checked) {
+            console.log("Checkbox is checked..");
+            var theUrl = 'http://127.0.0.1:3000/room/public?public=true&idroom=' + idroom;
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("POST", theUrl, false); // false for synchronous request
+            xmlHttp.send(null);
+            return xmlHttp.responseText;
+        } else {
+            console.log("Checkbox is unchecked..");
+            var theUrl = 'http://127.0.0.1:3000/room/public?public=false&idroom=' + idroom;
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("POST", theUrl, false); // false for synchronous request
+            xmlHttp.send(null);
+            return xmlHttp.responseText;
+        }
+    })
+});

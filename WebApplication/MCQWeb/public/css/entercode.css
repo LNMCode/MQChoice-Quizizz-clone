@@ -1,26 +1,25 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:200,300,400,500,600,700,800,900&display=swap');
-
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
 
-body{
+body {
     overflow-x: hidden;
 }
 
-.login-page{
+.login-page {
     background: #fff;
 }
 
-.card-outline{
+.card-outline {
     border-top: 3px solid #ffa200 !important;
 }
 
-:root{
+:root {
     --black: #333;
     --yellow: #ffa200;
     --yellow2: #ffbf75;
@@ -29,7 +28,7 @@ body{
     --black2: #333;
 }
 
-section{
+section {
     position: relative;
     width: 100%;
     min-height: 100vh;
@@ -39,7 +38,7 @@ section{
     background: var(--white);
 }
 
-header{
+header {
     position: fixed;
     top: 0;
     left: 0;
@@ -53,19 +52,18 @@ header{
     background: var(--white);
 }
 
-header .logo{
+header .logo {
     position: relative;
-    max-width: 70px;   
+    max-width: 70px;
 }
 
-header .logo img{
-    
+header .logo img {
     height: 100%;
     max-width: 130px;
     object-fit: contain;
 }
 
-header ul{
+header ul {
     position: relative;
     display: flex;
     justify-content: center;
@@ -73,20 +71,20 @@ header ul{
     margin-bottom: 0px;
 }
 
-header ul li{
+header ul li {
     list-style: none;
     display: flex;
     margin-left: 30px;
 }
 
-header ul li a{
+header ul li a {
     display: inline-block;
     color: var(--black);
     font-weight: 500;
     text-decoration: none;
 }
 
-header ul li .signup{
+header ul li .signup {
     padding: 13px 20px;
     width: 150px;
     background: var(--yellow);
@@ -99,6 +97,6 @@ header ul li .signup{
     text-align: center;
 }
 
-header ul li .signup:hover{
+header ul li .signup:hover {
     background: var(--black);
 }

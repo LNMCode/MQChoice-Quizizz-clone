@@ -34,6 +34,16 @@
             </div>
         @endforeach
     </div>
+    
+    <!-- TEST UI -->
+    <div class="container-correct-question invisible" id="container-correct-question">
+        <section>
+            <div id="container-correct-bg">
+                <div class="round-time-bar" id="round-time-bar-correct" data-style="smooth" style="--duration: 5;"><div></div></div>
+                <p id="text-correct">Enter question</p>
+            </div>
+        </section>
+    </div>
 </body>
 @include('socket')
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>

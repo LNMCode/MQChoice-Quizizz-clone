@@ -91,3 +91,59 @@ body {
         transform: scaleX(0);
     }
 }
+
+
+/*Test ui*/
+
+.container-correct-question {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99999;
+}
+
+.container-correct-question section {
+    position: relative;
+    height: 100vh;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    bottom: 0;
+}
+
+.container-correct-question section div {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20vh;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.container-correct-question section div #text-correct {
+    text-align: center;
+    margin: 0;
+    font-size: larger;
+    font-weight: 500;
+    color: white;
+}
+
+.container-correct-question section div #round-time-bar-correct {
+    border-radius: 0px;
+}
+
+.container-correct-question-animshow {
+    -webkit-animation: addquestionshow 0.5s;
+}
+
+@-webkit-keyframes addquestionshow {
+    0% {
+        top: 100%;
+    }
+    100% {
+        top: 0px;
+    }
+}

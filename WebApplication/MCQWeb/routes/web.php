@@ -8,6 +8,8 @@ use \App\Http\Controllers\Users\LoginController;
 use \App\Http\Controllers\Users\JoinRoomController;
 use \App\Http\Controllers\Users\RoomQuesController;
 use \App\Http\Controllers\Users\EnterCodeController;
+use \App\Http\Controllers\Users\WaitRoomFisnishController;
+use \App\Http\Controllers\Users\SummaryController;
 
 use \App\Http\Controllers\Host\HostRoomController;
 use \App\Http\Controllers\Host\ManageRoomController;
@@ -43,3 +45,9 @@ Route::get('/manageroom/{idroom}', [ManageRoomController::class, 'index']);
 Route::get('/host/{idroom}', [HostRoomController::class, 'index']);
 
 Route::get('/hostflowroom/flowroom', [HostFlowRoomController::class, 'index']);
+
+Route::get('/summary/{idroom}/{iduser}', [SummaryController::class, 'index']);
+
+Route::get('/waitroomfinish/{idroom}/{iduser}', [WaitRoomFisnishController::class, 'index']);
+
+Route::post('/admin/public', [AdminController::class, 'public']);

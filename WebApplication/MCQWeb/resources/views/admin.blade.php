@@ -16,7 +16,7 @@
 
     @yield('header')
 
-    <section class="content">
+    <section class="content section-top">
 
         <!-- Default box -->
         <div class="card">
@@ -78,6 +78,10 @@
                                 <p>
                                   <a href="/manageroom/{{$room['idroom']}}" class="link-black text-sm"><i class="fas fa-edit mr-1"></i> Edit questions for room</a>
                                 </p>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="public" name="public" value="{{$room['idroom']}}" {{ $room['ispublic'] ? 'checked' : ''}}>
+                                    <label class="form-check-label" for="public" >Public</label>
+                                </div>
                                 <a type="button" class="btn btn-primary {{sizeof($room['data']) > 0 ? '' : 'disabled'}}" href="/host/{{$room['idroom']}}">Open room</a>
                                 <button type="button" class="btn btn-danger" onclick="deleteRoom({{$room['idroom']}})">Delete room</button>
                                 @if (sizeof($room['data']) <= 0)
@@ -115,6 +119,36 @@
           <!-- /.card-body -->
         </div>
         <!-- /.card -->
+      </section>
+
+      <section class="content">
+        <div class="card">
+            
+          <div class="card-header">
+            <h3 class="card-title">Room in library</h3>
+  
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="card-body">
+                <div class="row d-flex justify-content-center">
+                    @foreach ($allroom as $room)
+                        @if ($room['ispublic'])
+                                <div class="card col-lg-3 m-2">
+                                <img class="card-img-top card-public" src="{{$room['imageUrl'] != 'null' ? $room['imageUrl'] : '../image/logo.jpg'}}" alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">{{$room['desription']}}</p>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+          </div>
+        </div>
       </section>
       <!-- Add new room -->
       <div class="container-add-room invisible" id="container-add-room">

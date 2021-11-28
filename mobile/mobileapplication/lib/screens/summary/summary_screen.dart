@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobileapplication/components/constants.dart';
+import 'package:mobileapplication/components/rounded_button.dart';
 import 'package:mobileapplication/models/getroom/player.dart';
 import 'package:mobileapplication/models/getroom/room_response.dart';
+import 'package:mobileapplication/screens/entercode/entercode_screen.dart';
 import 'package:mobileapplication/screens/summary/blocs/summary_bloc.dart';
 import 'package:mobileapplication/screens/summary/blocs/summary_event.dart';
 import 'package:mobileapplication/screens/summary/blocs/summary_state.dart';
@@ -69,6 +71,21 @@ class _SummaryScreen extends State<SummaryScreen> {
       child: SafeArea(
         child: ListView(
           children: [
+            RoundedButton(
+              text: 'Find another room',
+              color: kPrimaryColor,
+              margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+              press: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const EnterCodeScreen();
+                    },
+                  ),
+                );
+              },
+            ),
             Container(
               height: size.height * 0.3,
               child: Center(
