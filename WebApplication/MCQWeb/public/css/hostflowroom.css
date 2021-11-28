@@ -9,6 +9,9 @@
 
 body {
     overflow-x: hidden;
+    background: url('../../image/background-1.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 :root {
@@ -25,7 +28,208 @@ section {
     width: 100%;
     min-height: 100vh;
     padding: 100px;
-    justify-content: space-around;
+    background: none;
+    margin-top: 150px;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 100px;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    background: var(--white);
+    z-index: 10000;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+header .coderoom {
+    text-align: center;
+    color: white;
+}
+
+header .coderoom .text {
+    font-size: 13px;
+}
+
+header .coderoom .id {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+header .logo {
+    position: relative;
+    max-width: 70px;
+}
+
+header .logo img {
+    height: 100%;
+    max-width: 130px;
+    object-fit: contain;
+}
+
+header ul {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0px;
+}
+
+header ul li {
+    list-style: none;
+    display: flex;
+    margin-left: 30px;
+}
+
+header ul li a {
+    display: inline-block;
+    color: var(--black);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+header ul li .signup {
+    padding: 13px 20px;
+    width: 150px;
+    background: var(--yellow);
+    color: var(--white2);
+    border-radius: 40px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: 0.3s;
+    text-align: center;
+}
+
+header ul li .signup:hover {
+    background: var(--black);
+}
+
+.report-player-ngoai {
+    position: relative;
+    width: 100%;
+    padding: 0 40px;
+    box-sizing: border-box;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+
+.report-player {
+    height: 56px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid #000;
+    color: #fff;
+    border-radius: 8px;
+    width: calc(100% - 80px);
+    left: 40px;
+    top: 0;
+    transition: 0.5s top ease-in-out, 3s background-color ease-in-out, 0.2s opacity ease-in-out, 0.2s height ease-in-out;
+    box-sizing: border-box;
+    padding: 3px 0;
+    margin-bottom: 15px;
+}
+
+.wrap-god-card-bg {
+    color: white;
+}
+
+.idx {
+    display: inline-block;
+    width: 64px;
+    text-align: left;
+    vertical-align: middle;
+    margin: 0 8px 0 16px;
+}
+
+.idx-value {
+    text-align: left;
+}
+
+.player-img {
+    display: inline-block;
+    width: 60px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.player-img-circle {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    background-position: center;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.1);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-sizing: border-box;
+    border: 2px solid #fff;
+}
+
+.player-name {
+    display: inline-block;
+    padding: 0 6px 0 16px;
+    width: 216px;
+    box-sizing: border-box;
+    overflow: hidden;
+    vertical-align: middle;
+    max-height: 40px;
+    font-size: 16px;
+}
+
+.player-progress {
+    display: inline-block;
+    width: calc(100% - 516px);
+    padding: 0 16px;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+
+.progress {
+    height: 28px;
+    background-color: #000;
+    border-radius: 6px;
+    line-height: 12px;
+    position: relative;
+}
+
+.progress-inner {
+    border-radius: 6px;
+    overflow: hidden;
+    display: inline-block;
+    width: 101%;
+    display: flex;
+}
+
+.correct {
+    background-color: #4ed190;
+    height: 28px;
+    display: inline-block;
+    transition: 0.2s width ease-in-out;
+}
+
+.incorrect {
+    background-color: #e5446d;
+    height: 28px;
+    display: inline-block;
+    transition: 0.2s width ease-in-out;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.streak-text {
+    position: absolute;
+    left: 8px;
+    top: 6px;
+}
+
+.points {
+    display: inline-block;
+    width: 88px;
+    text-align: right;
+    vertical-align: middle;
+    margin: 0 16px;
 }

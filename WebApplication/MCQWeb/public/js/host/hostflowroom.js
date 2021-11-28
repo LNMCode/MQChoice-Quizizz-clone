@@ -3,6 +3,7 @@ const socket_port = '3000'
 
 var idroom = document.getElementById('idroom').innerHTML
 var iduser = document.getElementById('iduser').innerHTML
+var numberQuestion = document.getElementById('number-question').innerHTML;
 
 var socket = io.connect('http://127.0.0.1:3000');
 
@@ -15,7 +16,20 @@ socket.emit('hostObserveRoomPlay', {
 });
 
 socket.on('playerAnswered' + idroom, (data) => {
-    console.log(data);
+    console.log(data.istrue);
+    var mainwidth = document.getElementById('progress-inner').clientWidth;
+    if (data.istrue) {
+        var correct = document.getElementById('correct-' + data.iduser);
+        var correctwidth = correct.clientWidth;
+        console.log(correctwidth);
+        correct.style.width = (correctwidth + (mainwidth / numberQuestion)) + 'px'
+    } else {
+        var incorrect = document.getElementById('incorrect-' + data.iduser);
+        var incorrectwidth = incorrect.clientWidth;
+        console.log(incorrectwidth);
+        incorrect.style.width = (incorrectwidth + (mainwidth / numberQuestion)) + 'px'
+    }
+
 });
 
 function onCloseRoom(data) {

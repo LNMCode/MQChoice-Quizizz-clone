@@ -31,3 +31,52 @@ section {
     align-items: center;
     color: white;
 }
+
+.container {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.container-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.container-card-rank {
+    padding: 20px;
+    border-color: white;
+    border-width: 20px;
+}
+
+.container-card-rank img {
+    width: 150px;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.container-card-rank .number {
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.container-list {}
+
+.container-list-item {
+    border-radius: 10px;
+    color: black;
+    padding: 10px;
+    display: flex;
+}
+
+.container-list-item .name {
+    margin-left: 25px;
+}
+
+.container-list-item .score {
+    right: 0;
+    position: absolute;
+    margin-right: 30px;
+}

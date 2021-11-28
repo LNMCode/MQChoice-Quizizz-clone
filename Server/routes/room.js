@@ -130,22 +130,26 @@ router.get('/addquestion', async(req, res) => {
             ans: [{
                     idans: 'ans1',
                     valueans: valueans1,
-                    color: correct === 'ans1' ? 'green' : 'red'
+                    color: correct === 'ans1' ? 'green' : 'red',
+                    color_v2: 'primary'
                 },
                 {
                     idans: 'ans2',
                     valueans: valueans2,
-                    color: correct === 'ans2' ? 'green' : 'red'
+                    color: correct === 'ans2' ? 'green' : 'red',
+                    color_v2: 'info'
                 },
                 {
                     idans: 'ans3',
                     valueans: valueans3,
-                    color: correct === 'ans3' ? 'green' : 'red'
+                    color: correct === 'ans3' ? 'green' : 'red',
+                    color_v2: 'warning'
                 },
                 {
                     idans: 'ans4',
                     valueans: valueans4,
-                    color: correct === 'ans4' ? 'green' : 'red'
+                    color: correct === 'ans4' ? 'green' : 'red',
+                    color_v2: 'danger'
                 }
             ]
         }
