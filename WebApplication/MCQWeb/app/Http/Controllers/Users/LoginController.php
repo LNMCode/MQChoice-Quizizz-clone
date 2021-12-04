@@ -26,10 +26,13 @@ class LoginController extends Controller
                 if($username == $user['username'] && $password == $user['password']){
                     $rooms = $this->getListRoomById($user['rooms'], $url_current, $user['id']);
                     $this->saveUserLogin($user['id'], $user['username'], $user['password']);
+                    $allroom = $this->getallroom($url_current);
+
                     return view('admin', [
                         'title' => 'Admin page',
                         'data' => $user,
                         'rooms' => $rooms,
+                        'allroom' => $allroom,
                         'type' => gettype($rooms),
                         'url' => $url_current.'/room'
                     ]);
@@ -61,5 +64,10 @@ class LoginController extends Controller
             return false;
         }
         return true;
+    }
+    
+    private function getallroom($url_current){
+        $response = Http::get($url_current.'/room/getallroom');
+        return $response['doc'];
     }
 }
