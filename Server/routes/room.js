@@ -132,26 +132,26 @@ router.get('/addquestion', async(req, res) => {
             ans: [{
                     idans: 'ans1',
                     valueans: valueans1,
+                    colorv2: 'primary',
                     color: correct === 'ans1' ? 'green' : 'red',
-                    color_v2: 'primary'
                 },
                 {
                     idans: 'ans2',
                     valueans: valueans2,
+                    colorv2: 'info',
                     color: correct === 'ans2' ? 'green' : 'red',
-                    color_v2: 'info'
                 },
                 {
                     idans: 'ans3',
                     valueans: valueans3,
+                    colorv2: 'warning',
                     color: correct === 'ans3' ? 'green' : 'red',
-                    color_v2: 'warning'
                 },
                 {
                     idans: 'ans4',
                     valueans: valueans4,
+                    colorv2: 'danger',
                     color: correct === 'ans4' ? 'green' : 'red',
-                    color_v2: 'danger'
                 }
             ]
         }
@@ -199,26 +199,26 @@ router.post('/addquestionbycsv', async(req, res) => {
                 ans: [{
                         idans: 'ans1',
                         valueans: valueans1,
+                        colorv2: 'primary',
                         color: correct === 'ans1' ? 'green' : 'red',
-                        color_v2: 'primary'
                     },
                     {
                         idans: 'ans2',
                         valueans: valueans2,
+                        colorv2: 'info',
                         color: correct === 'ans2' ? 'green' : 'red',
-                        color_v2: 'info'
                     },
                     {
                         idans: 'ans3',
                         valueans: valueans3,
+                        colorv2: 'warning',
                         color: correct === 'ans3' ? 'green' : 'red',
-                        color_v2: 'warning'
                     },
                     {
                         idans: 'ans4',
                         valueans: valueans4,
+                        colorv2: 'danger',
                         color: correct === 'ans4' ? 'green' : 'red',
-                        color_v2: 'danger'
                     }
                 ]
             }
@@ -253,25 +253,25 @@ router.get('/updatequestion', async(req, res) => {
                         idans: 'ans1',
                         valueans: ans1,
                         color: answer === 'ans1' ? 'green' : 'red',
-                        color_v2: 'primary'
+                        colorv2: 'primary'
                     },
                     {
                         idans: 'ans2',
                         valueans: ans2,
                         color: answer === 'ans2' ? 'green' : 'red',
-                        color_v2: 'info'
+                        colorv2: 'info'
                     },
                     {
                         idans: 'ans3',
                         valueans: ans3,
                         color: answer === 'ans3' ? 'green' : 'red',
-                        color_v2: 'warning'
+                        colorv2: 'warning'
                     },
                     {
                         idans: 'ans4',
                         valueans: ans4,
                         color: answer === 'ans4' ? 'green' : 'red',
-                        color_v2: 'danger'
+                        colorv2: 'danger'
                     }
                 ]
             }
@@ -380,6 +380,18 @@ router.post('/public', async(req, res) => {
                 res.json({ message: 'ok', doc: doc });
             }
         });
+    } catch (error) {
+        res.json({ message: error });
+    }
+})
+
+router.post('/removeallplayer', async(req, res) => {
+    try {
+        var idroom = req.query.idroom;
+        await Room.findOneAndUpdate({ idroom: idroom }, {
+            players: [],
+        })
+        res.json({ message: 'ok' });
     } catch (error) {
         res.json({ message: error });
     }

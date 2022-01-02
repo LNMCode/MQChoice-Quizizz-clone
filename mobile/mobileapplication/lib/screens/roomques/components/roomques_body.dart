@@ -197,7 +197,7 @@ class _RoomQuesBody extends State<RoomQuesBody> {
     for (final ans in ques.ans) {
       childs.add(
         RoundedButton(
-          color: color_v2_map[ans.color_v2] ?? color_v2_primary,
+          color: color_v2_map[ans.colorv2] ?? color_v2_primary,
           textColor: Colors.white,
           text: ans.valueans,
           margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),

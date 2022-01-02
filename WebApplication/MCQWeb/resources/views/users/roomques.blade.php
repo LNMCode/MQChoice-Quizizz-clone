@@ -22,7 +22,7 @@
                     <div class="row">
                         @foreach ($ques['ans'] as $ans)
                             <div class="option-ans col-lg-3">
-                                <button id="{{$ques['idques']}}{{$ans['idans']}}" type="button" class="btn btn-{{$ans['color_v2']}}" onclick="onClickAns('{{$ques['correct']}}','{{$idroom}}', '{{$iduser}}', '{{$ques['idques']}}', '{{$ans['idans']}}', '{{$ans['valueans']}}', '{{json_encode($ques['ans'])}}', {{$loop->iteration}})">{{$ans['valueans']}}</button>
+                                <button id="{{$ques['idques']}}{{$ans['idans']}}" type="button" class="btn btn-{{$ans['colorv2']}}" onclick="onClickAns('{{$ques['correct']}}','{{$idroom}}', '{{$iduser}}', '{{$ques['idques']}}', '{{$ans['idans']}}', '{{$ans['valueans']}}', '{{json_encode($ques['ans'])}}', {{$loop->iteration}})">{{$ans['valueans']}}</button>
                             </div>
                         @endforeach
                     </div>

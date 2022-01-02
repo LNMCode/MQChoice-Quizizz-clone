@@ -16,7 +16,9 @@ class SummaryController extends Controller
             //$player = $this->findPlayerById($iduser, $room['players']);
             //echo $player['play'];
             $playerranked = $this->sortRanked($room['players']);
-            
+            if ($iduser == "null"){
+                $this->removeAllPlayerInRoom($room['idroom']);
+            }
             return view('users.summary', [
                 'title' => "Summary",
                 'idroom' => $room['idroom'],
@@ -45,5 +47,10 @@ class SummaryController extends Controller
         asort($output);
         $output = array_reverse($output, TRUE);
         return $output;
+    }
+
+    private function removeAllPlayerInRoom($idroom){
+        $url_current = 'http://127.0.0.1:3000';
+        $res = Http::post($url_current.'/room/removeallplayer?idroom='.$idroom);
     }
 }
