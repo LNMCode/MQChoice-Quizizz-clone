@@ -9,7 +9,7 @@ import 'package:mobileapplication/models/insert_user_response.dart';
 import 'package:mobileapplication/responsitory/stream_socket.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-const baseUrl = 'http://192.168.1.26:3000';
+const baseUrl = 'http://192.168.1.82:3000';
 
 class Repository {
   final Dio _dio = Dio();

@@ -39,7 +39,9 @@ function onCloseRoom(data) {
         socket.emit('finishRoomFromHost', { idroom: data.value });
         closeRoom(data);
         window.onbeforeunload = false;
-        window.location.replace('http://localhost:8000/admin');
+        //window.location.replace('http://localhost:8000/admin');
+        window.location.replace('http://127.0.0.1:8000/summary/' +
+            data.value + '/null')
     } else {
         console.log('Huy dong');
     }

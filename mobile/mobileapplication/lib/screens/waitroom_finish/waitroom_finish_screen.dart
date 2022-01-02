@@ -58,7 +58,6 @@ class _WaitRoomFinishScreen extends State<WaitRoomFinishScreen> {
               stream: _streamSocket.getResponse,
               builder: (context, snapshot) {
                 if (snapshot.hasData && snapshot.data == widget.idroom) {
-                  print('Change thoi du ma m');
                   Future.delayed(Duration.zero, () {
                     Navigator.pushReplacement(
                       context,

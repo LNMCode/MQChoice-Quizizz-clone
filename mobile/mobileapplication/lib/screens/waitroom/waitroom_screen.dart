@@ -47,52 +47,66 @@ class _WaitRoomScreenState extends State<WaitRoomScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.idroom),
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/images/background-2.jpg"),
+          fit: BoxFit.cover,
+        ),
       ),
-      body: BlocConsumer<WaitRoomBloc, WaitRoomState>(
-        listener: (context, state) {
-          if (state is WaitRoomSuccess) {
-            _streamSocket = state.streamSocket;
-          }
-        },
-        builder: (context, state) {
-          if (_streamSocket != null) {
-            return StreamBuilder(
-              stream: _streamSocket!.getResponse,
-              builder: (context, snapshot) {
-                if (snapshot.hasData && snapshot.data == widget.idroom) {
-                  // Navigate to roomques and start
-                  Future.delayed(Duration.zero, () async {
-                    _streamSocket!.dispose();
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) {
-                        return RoomQuesScreen(iduser: widget.iduser);
-                      }),
-                    );
-                  });
-                }
-                if (snapshot.hasError) {
-                  return Text('Some thing error ' + snapshot.error.toString());
-                }
-                return Container(
-                  child: _WaitHostStartRoom(nameuser: widget.nameuser),
-                );
-              },
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          backgroundColor: Colors.black.withOpacity(0.4),
+          title: Text("Wait room ${widget.idroom}"),
+        ),
+        body: BlocConsumer<WaitRoomBloc, WaitRoomState>(
+          listener: (context, state) {
+            if (state is WaitRoomSuccess) {
+              _streamSocket = state.streamSocket;
+            }
+          },
+          builder: (context, state) {
+            if (_streamSocket != null) {
+              return StreamBuilder(
+                stream: _streamSocket!.getResponse,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData && snapshot.data == widget.idroom) {
+                    // Navigate to roomques and start
+                    Future.delayed(Duration.zero, () async {
+                      _streamSocket!.dispose();
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return RoomQuesScreen(
+                            iduser: widget.iduser,
+                            idroom: widget.idroom,
+                          );
+                        }),
+                      );
+                    });
+                  }
+                  if (snapshot.hasError) {
+                    return Text(
+                        'Some thing error ' + snapshot.error.toString());
+                  }
+                  return Container(
+                    child: _WaitHostStartRoom(nameuser: widget.nameuser),
+                  );
+                },
+              );
+            }
+            return Center(
+              child: Column(
+                children: [
+                  Text(widget.iduser),
+                  Text(widget.idroom),
+                  Text(widget.nameuser),
+                ],
+              ),
             );
-          }
-          return Center(
-            child: Column(
-              children: [
-                Text(widget.iduser),
-                Text(widget.idroom),
-                Text(widget.nameuser),
-              ],
-            ),
-          );
-        },
+          },
+        ),
       ),
     );
   }
@@ -114,9 +128,11 @@ class _WaitHostStartRoom extends StatelessWidget {
         children: [
           Container(
             width: size.width,
-            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-            decoration: const BoxDecoration(
-              color: borderColor,
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+            margin: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.6),
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -126,6 +142,7 @@ class _WaitHostStartRoom extends StatelessWidget {
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 ),
                 CircleAvatar(
@@ -148,6 +165,7 @@ class _WaitHostStartRoom extends StatelessWidget {
             child: const Text(
               'Waiting for the host to start...',
               style: TextStyle(
+                color: Colors.white,
                 fontSize: 15,
               ),
             ),

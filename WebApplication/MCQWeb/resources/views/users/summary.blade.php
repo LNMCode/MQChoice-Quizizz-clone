@@ -11,8 +11,21 @@
             <div class="container-card">
                 <div class="container-card-rank">
                     <img src="../../image/cup-icon.png" alt="#">
-                    <p>Your ranked</p>
-                    <p class="number">{{array_search($iduser, array_keys($rankedlist)) + 1}}</p>
+                    @if ($iduser != "null")
+                        <p>Your ranked</p>
+                        <p class="number">{{array_search($iduser, array_keys($rankedlist)) + 1}}</p>
+                    @else
+                        <p>The winner is</p>
+                        @foreach ($rankedlist as $x => $x_value)
+                            @foreach ($players as $player)
+                                @if ($player['id'] == $x)
+                                    <p class="number">{{$player['name']}}</p>
+                                    @break
+                                @endif
+                            @endforeach
+                            @break
+                        @endforeach
+                    @endif
                 </div>
             </div>
             <div class="container-list">    

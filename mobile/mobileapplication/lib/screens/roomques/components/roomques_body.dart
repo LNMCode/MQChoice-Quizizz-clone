@@ -129,6 +129,12 @@ class _RoomQuesBody extends State<RoomQuesBody> {
     List<Widget> childs = [];
     for (final ques in widget.room.data) {
       var container = Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/background-2.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
         width: size.width,
         child: Column(
           children: [
@@ -149,13 +155,15 @@ class _RoomQuesBody extends State<RoomQuesBody> {
               width: size.width,
               height: size.height * 0.4,
               child: Container(
+                color: Colors.black.withOpacity(0.6),
                 padding: const EdgeInsets.symmetric(vertical: 10),
+                margin: const EdgeInsets.all(8),
                 alignment: Alignment.center,
                 child: Text(
                   ques.valueques,
                   style: const TextStyle(
                     fontSize: 18,
-                    color: Colors.black87,
+                    color: Colors.white,
                   ),
                 ),
               ),

@@ -68,6 +68,12 @@ class _SummaryScreen extends State<SummaryScreen> {
     var listPlayer = _rangedFilter(roomResponse.doc.players);
     var rank = listPlayer.indexWhere((element) => element.iduser == iduser);
     return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/images/background-2.jpg"),
+          fit: BoxFit.cover,
+        ),
+      ),
       child: SafeArea(
         child: ListView(
           children: [
@@ -88,8 +94,24 @@ class _SummaryScreen extends State<SummaryScreen> {
             ),
             Container(
               height: size.height * 0.3,
-              child: Center(
-                child: Text("Your rank is ${rank + 1}"),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/cupicon.png',
+                    fit: BoxFit.cover,
+                    width: 100.0,
+                    height: 100.0,
+                  ),
+                  Text(
+                    "Your rank is ${rank + 1}",
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
               ),
             ),
             Column(
@@ -111,6 +133,7 @@ class _SummaryScreen extends State<SummaryScreen> {
         decoration: BoxDecoration(
           border: Border.all(color: borderColor, width: 2),
           borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -118,11 +141,13 @@ class _SummaryScreen extends State<SummaryScreen> {
             Text(
               user.nameuser,
               style: const TextStyle(
-                fontSize: 19,
+                fontSize: 15,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Text("Score: ${user.correctNumber}"),
+            Text(
+              "Score: ${user.correctNumber}",
+            ),
           ],
         ),
       );
@@ -141,6 +166,7 @@ class _SummaryScreen extends State<SummaryScreen> {
       childs.add(UserRanked(player.id, player.name, correctNumber));
     }
     childs.sort((a, b) => a.correctNumber.compareTo(b.correctNumber));
+    childs = childs.reversed.toList();
     return childs;
   }
 }

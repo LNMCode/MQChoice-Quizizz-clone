@@ -9,10 +9,12 @@ import 'package:mobileapplication/screens/roomques/components/roomques_body.dart
 
 class RoomQuesScreen extends StatefulWidget {
   final String iduser;
+  final String idroom;
 
   const RoomQuesScreen({
     Key? key,
     required this.iduser,
+    required this.idroom,
   }) : super(key: key);
 
   @override
@@ -24,16 +26,13 @@ class _RoomQuesScreenState extends State<RoomQuesScreen> {
   void initState() {
     super.initState();
     BlocProvider.of<GetRoomBloc>(context)
-        .add(GetRoomEventRequested('id123456'));
+        .add(GetRoomEventRequested(widget.idroom));
   }
 
   @override
   Widget build(BuildContext context) {
     print('Room quest' + widget.iduser);
     return Scaffold(
-      appBar: AppBar(
-        title: Text('This is title of appBar'),
-      ),
       body: Center(
         child: BlocConsumer<GetRoomBloc, GetRoomState>(
           listener: (context, state) {},
@@ -53,7 +52,7 @@ class _RoomQuesScreenState extends State<RoomQuesScreen> {
               child: TextButton(
                 onPressed: () {
                   BlocProvider.of<GetRoomBloc>(context)
-                      .add(GetRoomEventRequested('id123456'));
+                      .add(GetRoomEventRequested(widget.idroom));
                 },
                 child: Column(
                   children: [

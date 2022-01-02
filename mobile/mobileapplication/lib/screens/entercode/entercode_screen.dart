@@ -13,7 +13,6 @@ import 'package:flutter/services.dart';
 import 'package:mobileapplication/screens/waitroom/waitroom_screen.dart';
 
 class EnterCodeScreen extends StatefulWidget {
-
   const EnterCodeScreen({
     Key? key,
   }) : super(key: key);
