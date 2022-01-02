@@ -41,6 +41,8 @@ Route::get('/users/joinroom/start', [RoomQuesController::class, 'index']);
 Route::get('/entercode', [EnterCodeController::class, 'index']);
 
 Route::get('/manageroom/{idroom}', [ManageRoomController::class, 'index']);
+Route::get('/manageroomdownloadform', [ManageRoomController::class, 'downloadform']);
+Route::post('/addquestionbycsv', [ManageRoomController::class, 'insertform']);
 
 Route::get('/host/{idroom}', [HostRoomController::class, 'index']);
 

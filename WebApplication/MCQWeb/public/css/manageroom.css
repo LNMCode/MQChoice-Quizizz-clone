@@ -99,10 +99,14 @@ header ul li .signup:hover {
 section {
     position: relative;
     width: 100%;
-    padding: 70px 300px 10px 300px;
+    padding: 0px 300px 10px 300px;
     justify-content: space-around;
     align-items: center;
     background: var(--white);
+}
+
+.p-70 {
+    padding-top: 70px;
 }
 
 .ques-content {

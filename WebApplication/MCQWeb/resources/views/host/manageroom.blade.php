@@ -15,7 +15,7 @@
     @endsection
     @yield('header')
 
-    <section class="enter-name-room">
+    <section class="enter-name-room p-70">
         <div class="card card-primary">
             <div class="card-header">
               <h3 class="card-title">Edit room</h3>
@@ -38,6 +38,41 @@
                         <input type="text" class="invisible d-none" value="{{$room['idroom']}}" name="idroom">
                     @endif
                     <button type="submit" href="#" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Insert questions by CSV file</h3>
+            </div>
+            <div class="card-body">
+                <form class="form-horizontal" method="POST" action="/addquestionbycsv" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+
+                    <div class="form-group{{ $errors->has('csv_file') ? ' has-error' : '' }}">
+                        <label for="csv_file" class="col-md-4 control-label">CSV file to import</label>
+
+                        <div class="col-md-6">
+                            <input id="csv_file" type="file" class="form-control" name="file" required>
+                            <input type="text" class="invisible d-none" value="{{$room['idroom']}}" name="idroom">
+                            <input type="text" class="invisible d-none" value="{{count($room['data'])+1}}" name="index">
+                            @if ($errors->has('csv_file'))
+                                <span class="help-block">
+                                <strong>{{ $errors->first('csv_file') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+                    <a href="/manageroomdownloadform" class="btn btn-success m-1" target="_blank">Download form CSV</a>
+                    <div class="form-group m-1">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i>
+                            Insert
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>

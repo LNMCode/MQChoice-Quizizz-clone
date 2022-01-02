@@ -3,6 +3,8 @@ const Question = require('../models/Question');
 const Room = require('../models/Room');
 const Users = require('../models/Users');
 const { route } = require('./joinroom');
+var fs = require('fs');
+var parse = require('csv-parse');
 
 const router = express.Router();
 
@@ -159,6 +161,72 @@ router.get('/addquestion', async(req, res) => {
         });
         res.end();
     } catch (err) {
+        res.json({ message: err });
+    }
+})
+
+router.post('/addquestionbycsv', async(req, res) => {
+    try {
+        var contents = req.body;
+        console.log(contents);
+        var result = [];
+        for (var k in contents) {
+            result.push(contents[k]);
+        }
+        var index = result.pop();
+        var idroom = result.pop();
+        console.log('idroom' + idroom);
+        console.log('index' + index);
+        console.log('result' + result);
+        for (const item of result) {
+            console.log(item);
+            var value = item.split(',');
+            var indexhaha = parseInt(index) + parseInt(value[0]);
+            var lastIndex = indexhaha.toString();
+            var titleques = value[1];
+            var valueans1 = value[2];
+            var valueans2 = value[3];
+            var valueans3 = value[4];
+            var valueans4 = value[5];
+            var correct = 'ans' + value[6];
+            var timequestion = value[7];
+            const insertquestion = {
+                idques: 'idq' + Date.now(),
+                valuesques: titleques,
+                correct: correct,
+                time: timequestion == undefined ? "30" : timequestion,
+                index: lastIndex,
+                ans: [{
+                        idans: 'ans1',
+                        valueans: valueans1,
+                        color: correct === 'ans1' ? 'green' : 'red',
+                        color_v2: 'primary'
+                    },
+                    {
+                        idans: 'ans2',
+                        valueans: valueans2,
+                        color: correct === 'ans2' ? 'green' : 'red',
+                        color_v2: 'info'
+                    },
+                    {
+                        idans: 'ans3',
+                        valueans: valueans3,
+                        color: correct === 'ans3' ? 'green' : 'red',
+                        color_v2: 'warning'
+                    },
+                    {
+                        idans: 'ans4',
+                        valueans: valueans4,
+                        color: correct === 'ans4' ? 'green' : 'red',
+                        color_v2: 'danger'
+                    }
+                ]
+            }
+            await Room.findOneAndUpdate({ idroom: idroom }, { $push: { data: insertquestion } });
+        }
+        res.status(200).send({ message: "ok" });
+    } catch (err) {
+        console.log(err);
         res.json({ message: err });
     }
 })
