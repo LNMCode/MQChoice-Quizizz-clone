@@ -11,6 +11,14 @@ class LoginController extends Controller
     public function index(){
         return view('users.login', [
             'title' => "Login",
+            'isnew' => false,
+        ]);
+    }
+
+    public function logincreatenew(){
+        return view('users.login', [
+            'title' => 'Create new a account',
+            'isnew' => true,
         ]);
     }
 

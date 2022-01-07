@@ -15,17 +15,7 @@
         </header>
     @endsection
 
-    @yield('header')
-
-    <div class="login-box">
-    <!-- /.login-logo -->
-    <div class="card card-outline card-primary">
-        <div class="card-header text-center">
-        <a href="#" class="h1"><b>MQ</b>Choice</a>
-        </div>
-        <div class="card-body">
-        <p class="login-box-msg">{{ $title }}</p>
-
+    @section('createnew')
         <form action="/users/login" method="post">
             <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="User name" name="username">
@@ -36,7 +26,15 @@
             </div>
             </div>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Password" name="password">
+                <input type="password" class="form-control" placeholder="Password" name="password">
+                <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                </div>
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <input type="password" class="form-control" placeholder="Confirm password" name="password">
                 <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-lock"></span>
@@ -44,12 +42,63 @@
                 </div>
             </div>
             <div class="row">
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary btn-block">Login</button>
-            </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary btn-block">Create</button>
+                </div> 
+                <div class="col-12 d-flex justify-content-center mt-2">
+                    <a href="/users/login" class="text-center"><small>Login</small></a>
+                </div>
             </div>
             @csrf
         </form>
+    @endsection
+
+    @section('login')
+        <form action="/users/login" method="post">
+            <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="User name" name="username">
+            <div class="input-group-append">
+                <div class="input-group-text">
+                <span class="fas fa-user"></span>
+                </div>
+            </div>
+            </div>
+            <div class="input-group mb-3">
+                <input type="password" class="form-control" placeholder="Password" name="password">
+                <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </div> 
+                <div class="col-12 d-flex justify-content-center mt-2">
+                    <a href="/users/logincreatenew" class="text-center"><small>Create new an account</small></a>
+                </div>
+            </div>
+            @csrf
+        </form>
+    @endsection
+
+    @yield('header')
+
+    <div class="login-box">
+    <!-- /.login-logo -->
+    <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+        <a href="/" class="h1"><b>MQ</b>Choice</a>
+        </div>
+        <div class="card-body">
+        <p class="login-box-msg">{{ $title }}</p>
+        
+        @if ($isnew)
+            @yield('createnew')
+        @else
+            @yield('login')
+        @endif
         <!-- /.card-body -->
     </div>
     <!-- /.card -->

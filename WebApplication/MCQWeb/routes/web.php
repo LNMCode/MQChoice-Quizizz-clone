@@ -30,6 +30,7 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/signout', [HomeController::class, 'signout']);
 
 Route::get('/users/login', [LoginController::class, 'index']);
+Route::get('/users/logincreatenew', [LoginController::class, 'logincreatenew']);
 Route::post('/users/login', [LoginController::class, 'login']);
 
 Route::get('/admin', [AdminController::class, 'index']);
