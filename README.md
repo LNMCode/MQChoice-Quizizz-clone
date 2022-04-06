@@ -1,6 +1,7 @@
 # ![Image Description](https://github.com/LNMCode/doanchuyennganh1/blob/master/image_des/image_1.png)
 
-## MQChoice 
+## MQChoice - Quizizz
+#### This is application clone Quizizz
 MQChoice is an application that supports real-time participation in multiple choice questions.
 User can participate using any type of device such as: browser, PC, laptop, tablet or smartphone.
 Support for editing multiple-choice questions with a simple, hassle-free interface and flow, making it easy for teachers to access. 
